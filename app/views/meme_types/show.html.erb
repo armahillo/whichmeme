@@ -1,0 +1,10 @@
+<h1><%= @meme_type.name %></h1>
+
+<table id="memes" class="table striped">
+  <%- @memes.each do |m| %> 
+    <tr id="<%= m.id %>">
+      <td><%= m.link_title %></td>
+      <td><%= m.meme_caption %></td>
+    </tr>
+  <%- end %>
+</table>

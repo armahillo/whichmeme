@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
   root to:'memes#index'
 
   resources :memes, only: [:index]
+
+  resources :meme_types, only: [:index, :show]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,9 +1,9 @@
 <table id="memes" class="table striped">
 <%- @memes.each do |m| %>
   <tr id="<%= m.id %>">
-    <td><%= m.meme_type.name %></td>
-    <td><%= m.title %></td>
-    <td><%= m.body %></td>
+    <td><%= link_to m.meme_type.name, meme_type_path(m.meme_type.id) %></td>
+    <td><%= m.link_title %></td>
+    <td><%= m.meme_caption %></td>
   </tr>
 <%- end %>
 </table>
