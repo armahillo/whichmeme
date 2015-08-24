@@ -4,6 +4,11 @@ lock '3.4.0'
 set :application, 'whichmeme'
 set :repo_url, 'aaron@45.55.181.42:~/git/whichmeme.git'
 
+# RVM configuration
+# set :rvm_type, :user # Default is "auto"
+# set :rvm_ruby_version, '2.2.1' # Default is "default"
+
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
