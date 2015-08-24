@@ -2,11 +2,13 @@
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
+set :stage, :production
+set :rails_env, :production
 
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server '45.55.181.42', user: 'deploy', roles: %w{web}
+server '45.55.181.42', user: 'deploy', roles: %w{web}, primary: true
 
 
 # role-based syntax
@@ -30,7 +32,6 @@ role :db,  %w{deploy@45.55.181.42}
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
 
 
 # Custom SSH Options
