@@ -1,0 +1,9 @@
+<table id="memes" class="table striped">
+<%- @memes.each do |m| %>
+  <tr id="<%= m.id %>">
+    <td><%= m.meme_type.name %></td>
+    <td><%= m.title %></td>
+    <td><%= m.body %></td>
+  </tr>
+<%- end %>
+</table>
