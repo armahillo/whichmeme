@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: whichmeme_prod
-  username: whichmeme
+  username: whichmeme_prod
   password: <%= ENV['WHICHMEME_DATABASE_PASSWORD'] %>
