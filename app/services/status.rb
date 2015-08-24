@@ -3,9 +3,8 @@ require 'json'
 class Status
   attr_accessor :data
 	
-  def initialize
-    raise "No last_seen specified in ENV" unless ENV.has_key?("LAST_SEEN")
-    @filename = ENV['LAST_SEEN']
+  def initialize(file)
+    @filename = file
     self.load
   end
 

@@ -1,8 +1,5 @@
 require 'snooby'
 
-#DATA_DIR = 'queue'
-#ARCHIVE_DIR = 'archive'
-#FAILED_DIR = 'failed'
 LOG_PREFIX = '[[MEMESCRAPR]]'
 VERSION = '1.0'
 
@@ -30,7 +27,7 @@ class MemeScrapr
     @count = 0
     @most_recent_timestamp = nil
 
-    File.open("#{QUEUE_DIR}/#{@filename}.txt", 'w') { |file|
+    File.open("#{QUEUED_DIR}/#{@filename}.txt", 'w') { |file|
       file.puts("#{LOG_PREFIX} REDDIT DUMP FROM #{@username.upcase}: #{time_of_run}")
       file.puts("#{LOG_PREFIX} SINCE UTC: #{@since}") unless @since == 0
       puts "Scraping Memes from #{@username} since #{@since}" if verbose
@@ -65,7 +62,7 @@ class MemeScrapr
       }
       puts "\n!!! Saved #{@unparsed_records.count} unparsed records to #{FAILED_DIR}/#{@unparseable_file}.txt" if verbose
     end
-    puts "\nDone!\n#{count} memes scraped. Saved to: #{QUEUE_DIR}/#{@filename}.txt" if verbose
+    puts "\nDone!\n#{count} memes scraped. Saved to: #{QUEUED_DIR}/#{@filename}.txt" if verbose
     return @most_recent_timestamp.to_i
   end
 
@@ -77,7 +74,7 @@ class MemeScrapr
     oldest_utc = nil
     newest_utc = nil
     # Iterate through the files and assemble them into a mega array
-    Dir.glob("#{QUEUE_DIR}/*.txt").each do |file|
+    Dir.glob("#{QUEUED_DIR}/*.txt").each do |file|
       print "#{file}: "
       begin
         new_data, new_ids = MemeScrapr.load_file_for_collation(file, ids_seen)
@@ -90,6 +87,8 @@ class MemeScrapr
       dataset += new_data
       File.rename(file, "#{file}.archived")
     end
+
+    if dataset.empty? then puts "Nothing to do!"; return; end
   	# Sort the mega-hash by created_at_utc
     sorted_data = dataset.sort_by { |m| m[:created_utc] }
     oldest_utc = sorted_data.first[:created_utc]
@@ -104,8 +103,8 @@ class MemeScrapr
         file.puts datum
       }
     }
-    FileUtils.mv Dir.glob("#{QUEUE_DIR}/*.archived"), ARCHIVE_DIR
-    FileUtils.cp(filename, QUEUE_DIR)
+    FileUtils.mv Dir.glob("#{QUEUED_DIR}/*.archived"), ARCHIVED_DIR
+    FileUtils.cp(filename, QUEUED_DIR)
   end
 
 private

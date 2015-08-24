@@ -7,6 +7,6 @@ Rails.application.initialize!
 DATA_DIR = File.join(Rails.root, 'data')
 FAILED_DIR = File.join(DATA_DIR, 'failed')
 QUEUED_DIR = File.join(DATA_DIR, 'queue')
-ARCHIVE_DIR = File.join(DATA_DIR, 'archive')
+ARCHIVED_DIR = File.join(DATA_DIR, 'archive')
 
-STATUS = Status.new
+STATUS = Status.new(File.join(DATA_DIR, 'status.json'))

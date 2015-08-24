@@ -5,8 +5,8 @@ namespace :data do
     skipped_records = []
     failed_inserts = []
 
-    failure_log = "./failed/#{Time.now.to_i}_failures.txt"
-    skipped_log = "./failed/#{Time.now.to_i}_skipped.txt"
+    failure_log = File.join(FAILED_DIR, "#{Time.now.to_i}_failures.txt")
+    skipped_log = File.join(FAILED_DIR, "#{Time.now.to_i}_skipped.txt")
 
     Meme.connection
     data.each { |meme| 
@@ -58,7 +58,7 @@ namespace :data do
   task :process_single, :filename do |t, args|
     raise Exception.new("No parameter 'file' provided") unless !args[:filename].nil?
 
-    seen_ids = JSON.parse(File.read('seen_ids.txt')) rescue []
+    seen_ids = JSON.parse(File.read(File.join(DATA_DIR,'seen_ids.txt'))) rescue []
     puts "Skipping #{seen_ids.count} records"
 
     skipped_records, failed_inserts = process_file(args[:filename], seen_ids)
@@ -76,7 +76,7 @@ namespace :data do
 
   desc "Process all in queue"
   task :process_queue do
-    queue = Dir.glob('./queue/*.txt')
+    queue = Dir.glob("#{QUEUED_DIR}/*.txt")
     queue.each do |file|
       puts "Processing #{file}"
       Rake::Task['data:process_single'].invoke(file)
@@ -85,13 +85,13 @@ namespace :data do
       Rake::Task['data:update_seen_cache'].reenable
       File.rename(file, "#{file}.archived")
     end
-    FileUtils.mv Dir.glob("./queue/*.archived"), './archive/'
+    FileUtils.mv Dir.glob("#{QUEUED_DIR}/*.archived"), ARCHIVED_DIR
   end
 
   desc "Update ID cache"
   task :update_seen_cache do
     seen_ids = Meme.all.select(:reddit_id).collect { |m| m.reddit_id }
-    filename = "seen_ids.txt"
+    filename = File.join(DATA_DIR,"seen_ids.txt")
     File.open(filename, 'w') { |file| file.write(seen_ids) }
     puts "Cached IDs for #{seen_ids.count} records.\nSaved to: #{filename}"
   end

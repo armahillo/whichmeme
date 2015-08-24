@@ -1,6 +1,12 @@
 require 'snooby'
 
 namespace :scrapr do
+  def scrape(username, comments, since)
+    # Named floyd because of reasons.
+    floyd = MemeScrapr.new(username, comments, since)
+    return floyd.scrape(true)
+  end
+
   desc "Determines the last time we refreshed, then pulls down latest content since then"
   task :scan => :environment do
     # First, we'll determine when we last scanned. 
@@ -18,10 +24,8 @@ namespace :scrapr do
     comments_to_pull = STATUS.data['comments_to_pull'] || 1000 
     # Scan these usernames, or default to captionbot
     username_to_scan = STATUS.data['usernames'].first || "captionbot"
+    new_last_seen = scrape(username_to_scan, comments_to_pull, since)
 
-    # Named floyd because of reasons.
-    floyd = MemeScrapr.new(username_to_scan, comments_to_pull, since)
-    new_last_seen = floyd.scrape(true)
     STATUS.data['last_seen'] = new_last_seen if !new_last_seen.nil?
     STATUS.save
   end
@@ -29,7 +33,5 @@ namespace :scrapr do
   desc "Combines all individuals pulls, omitting duplicates"
   task :collate => :environment do
     MemeScrapr.collate_files
-    collated_file = Dir.glob("./data/*.txt").first
-    MemeScrapr.generate_ranked_summary(collated_file) unless !File.exist?(collated_file)
   end
 end
