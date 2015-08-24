@@ -43,7 +43,6 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (6.0.2)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -200,7 +199,6 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  byebug
   capistrano-rails
   coffee-rails (~> 4.1.0)
   dotenv
