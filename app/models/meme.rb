@@ -23,7 +23,7 @@
 #
 
 class Meme < ActiveRecord::Base
-  belongs_to :meme_type
+  belongs_to :meme_type, counter_cache: :instance_count
 
   validates_presence_of [:reddit_id, :link_id, :body]
   validates_uniqueness_of [:reddit_id, :link_id]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825032625) do
+ActiveRecord::Schema.define(version: 20150825045736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150825032625) do
     t.string   "template_content_type"
     t.integer  "template_file_size"
     t.datetime "template_updated_at"
+    t.integer  "instance_count"
   end
 
   create_table "memes", force: :cascade do |t|

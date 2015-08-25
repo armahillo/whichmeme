@@ -8,6 +8,7 @@
 /.bundle
 /.env
 /data/**/*
+/public/system/**/*
 
 # Ignore all logfiles and tempfiles.
 /log/*

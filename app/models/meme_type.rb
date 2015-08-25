@@ -18,7 +18,7 @@ class MemeType < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  validates_attachment_content_type :template, content_type: /\aimage\/.*\z/
+  validates_attachment_content_type :template, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)'
 
   
 
