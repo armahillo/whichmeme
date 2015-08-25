@@ -55,7 +55,7 @@ namespace :data do
   end
 
   desc "Process a single file" 
-  task :process_single, :filename do |t, args|
+  task :process_single, [:filename] => :environment do |t, args|
     raise Exception.new("No parameter 'file' provided") unless !args[:filename].nil?
 
     seen_ids = JSON.parse(File.read(File.join(DATA_DIR,'seen_ids.txt'))) rescue []
@@ -75,7 +75,7 @@ namespace :data do
   end
 
   desc "Process all in queue"
-  task :process_queue do
+  task :process_queue => :environment do
     queue = Dir.glob("#{QUEUED_DIR}/*.txt")
     queue.each do |file|
       puts "Processing #{file}"
@@ -89,7 +89,7 @@ namespace :data do
   end
 
   desc "Update ID cache"
-  task :update_seen_cache do
+  task :update_seen_cache => :environment do
     seen_ids = Meme.all.select(:reddit_id).collect { |m| m.reddit_id }
     filename = File.join(DATA_DIR,"seen_ids.txt")
     File.open(filename, 'w') { |file| file.write(seen_ids) }
@@ -97,7 +97,7 @@ namespace :data do
   end
 
   desc "Get stats" 
-  task :stats do
+  task :stats => :environment do
     MemeType.order(:name).each { |t|
       puts "#{t.memes.count}\t#{t.name}"
     }
@@ -105,7 +105,7 @@ namespace :data do
   end
 
   desc "Update slugs"
-  task :update_slugs do
+  task :update_slugs => :environment do
     MemeType.all.each { |m| 
       puts "#{m.slug} => #{MemeType.slug_from_name(m.name)}"
       m.slugify
