@@ -12,8 +12,15 @@
 class MemeType < ActiveRecord::Base
   has_many :memes
 
+  has_attached_file :template, 
+                     styles: { medium: "300x300>", thumb: "100x100>", tiny: "30x30#" }, 
+                     default_style: :medium
+
   validates_presence_of :name
   validates_uniqueness_of :name
+  validates_attachment_content_type :template, content_type: /\aimage\/.*\z/
+
+  
 
   after_create :slugify
 

@@ -1,5 +1,5 @@
 <h1><%= @meme_type.name %></h1>
-
+<%= image_tag @meme_type.template.url(:medium) %>
 <table id="memes" class="table striped">
   <%- @memes.each do |m| %> 
     <tr id="<%= m.id %>">

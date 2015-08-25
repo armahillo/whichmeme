@@ -1,6 +1,7 @@
 <table id="memes" class="table striped">
 <%- @memes.each do |m| %>
   <tr id="<%= m.id %>">
+    <td><%= image_tag m.meme_type.template.url(:tiny) %></td>
     <td><%= link_to m.meme_type.name, meme_type_path(m.meme_type.id) %></td>
     <td><%= m.link_title %></td>
     <td><%= m.meme_caption %></td>
