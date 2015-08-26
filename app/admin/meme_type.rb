@@ -28,7 +28,9 @@ ActiveAdmin.register MemeType do
   index do
     selectable_column
     id_column
-    column :name
+    column :name do |mt|
+      link_to mt.name, admin_meme_type_path(mt)
+    end
     column :slug
     column :template do |mt|
       image_tag(mt.template(:tiny))
@@ -37,8 +39,8 @@ ActiveAdmin.register MemeType do
       mt.memes.count
     end
     column :example do |mt|
-      link_id = mt.memes.first.try(:link_id).split("_")[1] rescue nil
-      link_to_if link_id.present?, "Sample", "http://www.reddit.com/r/adviceanimals/#{link_id}"
+      link = mt.memes.first.to_url
+      link_to_if link.present?, "Sample", link
     end
     actions
   end
@@ -52,13 +54,19 @@ ActiveAdmin.register MemeType do
     f.actions
   end
 
-  show do |mt|
+  show title: :name do |mt|
     attributes_table do
       row :name
       row :slug
       row :template do
         image_tag(mt.template.url(:thumb))
       end
+    end
+  
+    table_for mt.memes do
+      column(:link_title) { |m| link_to m.link_title, edit_admin_meme_path(m) }
+      column :meme_caption
+      column("Link") { |m| link_to m.to_url }
     end
   end
 

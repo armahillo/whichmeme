@@ -27,6 +27,8 @@ class MemeType < ActiveRecord::Base
 
   after_create :slugify
 
+  scope :established, -> { where('instance_count > 5') }
+
   def absorb!(id)
     return if id == self.id
     mt = MemeType.includes(:memes).find(id)

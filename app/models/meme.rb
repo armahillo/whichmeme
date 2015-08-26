@@ -28,6 +28,12 @@ class Meme < ActiveRecord::Base
   validates_presence_of [:reddit_id, :link_id, :body]
   validates_uniqueness_of [:reddit_id, :link_id]
 
+  def to_url
+    l = self.try(:link_id).split("_")[1] rescue nil
+    return nil unless l.present?
+    "http://www.reddit.com/r/adviceanimals/#{l}"
+  end
+
   def to_hash
   	output = {}
   	[:id, :reddit_id, :link_id, :body, :meme_caption, :link_title, :subreddit, :subreddit_id, :created_utc, :source,
