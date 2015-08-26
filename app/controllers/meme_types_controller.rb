@@ -1,6 +1,7 @@
 class MemeTypesController < ApplicationController
   def index
-    @meme_types = MemeType.all
+    @established = MemeType.established.order('instance_count desc')
+    @long_tail = MemeType.long_tail.order('instance_count desc')
   end
 
   def show

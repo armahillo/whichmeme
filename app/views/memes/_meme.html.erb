@@ -1,0 +1,8 @@
+<% caption = JSON.parse(meme.meme_caption) %>
+<div style="display: inline; background-color: black;  margin: 5px; width: 300px; min-height: 350px; float: left;">
+<h4 style="color: #999;"><%= meme.link_title %></h4>
+<p style="margin: 0; background-color: black; color: white;"><%= caption[0] %></p>
+<%= image_tag(meme.meme_type.template(:medium)) %>
+<p style="margin: 0; background-color: black; color: white;"><%= caption[1] %></p>
+</div>
+

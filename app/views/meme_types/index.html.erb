@@ -1,2 +1,17 @@
-<h1>MemeTypes#index</h1>
-<p>Find me in app/views/meme_types/index.html.erb</p>
+<h1>Meme Templates</h1>
+
+<div class="col-md-8">
+<h3>Established Memes</h3>
+  <%- @established.each { |mt| %>
+        <%= link_to image_tag(mt.template(:tiny)), meme_type_path(mt) %>
+  <%- } %>
+</div>
+
+<div class="col-md-4">
+<h3>The Long Tail</h3>
+  <ul>
+  <%- @long_tail.each { |mt| %>
+       <li><%= link_to mt.name, meme_type_path(mt) %></li>
+  <%-  } %>
+  </ul>
+</div>

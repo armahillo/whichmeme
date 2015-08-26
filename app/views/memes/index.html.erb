@@ -1,3 +1,7 @@
+<%- @memes.each do |m| %>
+  <%= render partial: "memes/meme", object: m %>
+<%- end %>
+
 <table id="memes" class="table striped">
 <%- @memes.each do |m| %>
   <tr id="<%= m.id %>">
