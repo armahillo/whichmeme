@@ -25,20 +25,19 @@
 FactoryGirl.define do
   factory :meme do
     reddit_id "MyString"
-link_id "MyString"
-body "MyText"
-meme_type_id 1
-meme_caption "MyString"
-link_title "MyString"
-subreddit "MyString"
-subreddit_id "MyString"
-created_utc 1.5
-source "MyString"
-thumbnail "MyString"
-score 1
-ups 1
-link_created_utc 1.5
-title "MyString"
+    link_id "MyString"
+    body "MyText"
+    meme_type
+    meme_caption "MyString"
+    link_title "MyString"
+    subreddit "MyString"
+    subreddit_id "MyString"
+    created_utc 1.0
+    source "MyString"
+    thumbnail "MyString"
+    score 0
+    ups 0
+    link_created_utc 1.0
+    title "MyString"
   end
-
 end

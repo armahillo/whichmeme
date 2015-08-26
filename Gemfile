@@ -70,3 +70,7 @@ group :development, :test do
 
   gem 'annotate'
 end
+
+group :test do
+  gem 'database_cleaner'
+end

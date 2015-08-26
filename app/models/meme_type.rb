@@ -2,11 +2,16 @@
 #
 # Table name: meme_types
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  slug       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                    :integer          not null, primary key
+#  name                  :string
+#  slug                  :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  template_file_name    :string
+#  template_content_type :string
+#  template_file_size    :integer
+#  template_updated_at   :datetime
+#  instance_count        :integer
 #
 
 class MemeType < ActiveRecord::Base
@@ -20,9 +25,18 @@ class MemeType < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_attachment_content_type :template, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)'
 
-  
-
   after_create :slugify
+
+  def absorb!(id)
+    return if id == self.id
+    mt = MemeType.includes(:memes).find(id)
+    mt.memes.each do |m|
+      m.update_attributes({ meme_type_id: self.id })
+    end
+    mt.reload
+    mt.destroy if mt.memes.count == 0
+    MemeType.reset_counters(self.id, :memes)
+  end
 
   def slugify
     self.update_attributes(slug: MemeType.slug_from_name(name))

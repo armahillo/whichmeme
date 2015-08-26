@@ -1,6 +1,29 @@
 ActiveAdmin.register MemeType do
   
+  # Config
   permit_params :name, :slug, :created_at, :updated_at, :template
+  config.sort_order = 'instance_count_desc'
+
+  # Filters
+  filter :name, as: :string
+  filter :slug, as: :string
+  filter :instance_count, as: :numeric
+  filter :created_at
+
+  # Scopes
+  scope :all, default: true
+  scope("Established") { |scope| scope.where('instance_count > 5') }
+  scope("Long Tail") { |scope| scope.where('instance_count <= 5') }
+
+  # Custom Actions
+  batch_action :combine, form: { destination_id: :text }  do |ids, inputs|
+    absorbing_type = MemeType.find(inputs['destination_id']) 
+    ids.each do |id|
+      absorbing_type.absorb!(id)
+    end
+    MemeType.reset_counters(absorbing_type.id, :memes)
+    redirect_to :back
+  end
 
   index do
     selectable_column
@@ -12,6 +35,10 @@ ActiveAdmin.register MemeType do
     end
     column :instances, sortable: :instance_count do |mt|
       mt.memes.count
+    end
+    column :example do |mt|
+      link_id = mt.memes.first.try(:link_id).split("_")[1] rescue nil
+      link_to_if link_id.present?, "Sample", "http://www.reddit.com/r/adviceanimals/#{link_id}"
     end
     actions
   end
