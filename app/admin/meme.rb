@@ -1,5 +1,8 @@
 ActiveAdmin.register Meme do
 
+  # Config
+  permit_params :meme_type_id, :body, :meme_caption, :link_title, :subreddit, :created_utc, :source, :thumbnail, :score, :ups, :link_created_utc, :title
+
   # Filters
   filter :meme_type
   filter :meme_caption
@@ -60,7 +63,6 @@ ActiveAdmin.register Meme do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-# permit_params :list, :of, :attributes, :on, :model
 #
 # or
 #

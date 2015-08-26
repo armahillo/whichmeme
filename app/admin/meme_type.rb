@@ -12,7 +12,7 @@ ActiveAdmin.register MemeType do
 
   # Scopes
   scope :all, default: true
-  scope("Established") { |scope| scope.where('instance_count > 5') }
+  scope :established
   scope("Long Tail") { |scope| scope.where('instance_count <= 5') }
 
   # Custom Actions
