@@ -1,5 +1,5 @@
 <%- @memes.each do |m| %>
-  <%= render partial: "memes/meme", object: m %>
+  <%= render partial: "memes/meme_medium", object: m, as: :meme %>
 <%- end %>
 
 <table id="memes" class="table striped">

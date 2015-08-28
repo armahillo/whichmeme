@@ -1,0 +1,3 @@
+<%= render partial: "memes/meme_large", object: @meme, as: :meme %>
+
+<p style="clear:both;">See more <%= link_to @meme.meme_type.name, meme_type_path(@meme.meme_type) %> memes</p>

@@ -1,3 +1,95 @@
 // Place all the styles related to the memes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Open Source "Impact" like font */
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:900);
+
+
+article.meme { 
+  font-family: 'Work Sans', 'Arial', 'Verdana', 'sans-serif';
+}
+article.meme.large {
+  font-size: 2em;
+  width: 500px; 
+}
+article.meme.medium {
+  font-size: 1.2em;
+  width: 300px;
+}
+
+article.meme h4 {
+  text-align: center;
+  margin: 0;
+  color: #999;
+}
+article.meme.large h4 {
+  padding: 4px 2px;
+  min-height: 25px;
+  font-weight: 100 !important;
+  font-size: 20px
+}
+article.meme.medium h4 {
+  padding: 2px 1px;
+  min-height: 20px;
+  font-weight: 100 !important;
+  font-size: 15px;
+}
+
+article.meme .template {
+  height: auto;
+  position: relative;
+}
+article.meme a {
+  
+}
+article.meme.large .template {
+  width: 500px;
+  max-width: 500px;
+  max-height: 500px;
+}
+article.meme.medium .template {
+  width: 300px;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+article.meme .template p {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  color: white;
+}
+article.meme.large .template p {
+  padding: 0 2px;
+  line-height: 1em;
+  text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
+}
+article.meme.medium .template p {
+  padding: 0 1px;
+  line-height: 1em;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
+article.meme.large .template p.top {
+  top: 10px;
+}
+article.meme.large .template p.bottom {
+  bottom: 10px;
+}
+article.meme.medium .template p.top {
+  top: 6px;
+}
+article.meme.medium .template p.bottom {
+  bottom: 6px;
+}

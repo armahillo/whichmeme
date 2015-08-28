@@ -1,3 +1,22 @@
 // Place all the styles related to the MemeTypes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.meme_types {
+}
+
+.established.meme_types a {
+  display: inline-block;
+  margin: 2px 1px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.established.meme_types a img {
+  padding: 0;
+}
+
+.long-tail.meme_types {
+  
+}
