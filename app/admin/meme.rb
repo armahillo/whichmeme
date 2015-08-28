@@ -16,7 +16,6 @@ ActiveAdmin.register Meme do
       new_meme_name: :text 
     },
     method: :patch do |ids, inputs|
-    Rails.logger.info("#{ids.inspect} #{inputs.inspect}")
       # Initialize the meme_type that we'll be assigning
       meme_type = MemeType.find(inputs["meme_type"])
 
@@ -56,6 +55,9 @@ ActiveAdmin.register Meme do
     end
     column :meme_type do |m|
       link_to m.meme_type.name, admin_meme_type_path(m.meme_type)
+    end
+    column :live_link do |m|
+      link_to m.to_url, m.to_url
     end
     actions
   end

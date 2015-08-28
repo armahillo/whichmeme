@@ -66,7 +66,7 @@ ActiveAdmin.register MemeType do
     table_for mt.memes do
       column(:link_title) { |m| link_to m.link_title, edit_admin_meme_path(m) }
       column :meme_caption
-      column("Link") { |m| link_to m.to_url }
+      column("Link") { |m| link_to m.to_url, m.to_url }
     end
   end
 
