@@ -11,5 +11,14 @@
 #  updated_at      :datetime         not null
 #
 
-class MemetypeAssociation < ActiveRecord::Base
+class Games::MemetypeAssociation < ActiveRecord::Base
+  # The user
+  belongs_to :user
+
+  # Their answer
+  has_one :meme
+
+  # The actual meme
+  has_one :correct_meme, class_name: "Meme", foreign_key: "correct_meme_id"
+
 end

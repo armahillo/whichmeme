@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   resources :meme_types, only: [:index, :show]
 
+  namespace :games do
+    resources :memetype_associations, only: [:new, :create]
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

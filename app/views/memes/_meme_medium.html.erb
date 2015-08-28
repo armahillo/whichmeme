@@ -1,10 +1,12 @@
+<% meme ||= meme_medium %>
+<% meme_type ||= meme.meme_type %>
+<% no_link ||= false %>
 <% caption = JSON.parse(meme.meme_caption) %>
+
 <article class="meme medium" style="display: inline; background-color: black;  margin: 5px; float: left;">
-  <h4><%= meme.link_title %></h4>
+  <h4><%= link_to_unless no_link, meme.link_title, meme_path(meme) %></h4>
   <div class="template">
-    <a href="<%= meme_path(meme) %>">
-    <img src="<%= image_path(meme.meme_type.template(:medium)) %>" alt="<%= meme.meme_type.name %>" />
-    </a>
+    <img src="<%= image_path(meme_type.template(:medium)) %>" alt="<%= meme_type.name %>" />
     <p class="top text-center"><%= caption[0] %></p>
     <p class="bottom text-center"><%= caption[1] %></p>
   </div>

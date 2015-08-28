@@ -28,6 +28,9 @@ class Meme < ActiveRecord::Base
   validates_presence_of [:reddit_id, :link_id, :body]
   validates_uniqueness_of [:reddit_id, :link_id]
 
+  scope :established, -> { joins(:meme_type).where('meme_types.instance_count > 5') }
+  scope :long_tail, -> { joins(:meme_type).where('meme_types.instance_count <= 5') }
+
   def to_url
     l = self.try(:link_id).split("_")[1] rescue nil
     return nil unless l.present?

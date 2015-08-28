@@ -35,6 +35,10 @@ article.meme.medium h4 {
   font-weight: 100 !important;
   font-size: 15px;
 }
+article.meme h4 a {
+  color: inherit; 
+  text-decoration: none;
+}
 
 article.meme .template {
   height: auto;
