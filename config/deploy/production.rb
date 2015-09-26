@@ -66,10 +66,16 @@ set :ssh_options, {
 # For sudo'ing
 set :pty, true
 
-after :finishing, :restart do
-  on role(:app) do
-    say "Restarting Unicorn..."
-    execute "RAILS_ENV=production bundle exec unicorn --daemonize --config-file config/unicorn.rb"
+after 'deploy:finishing', 'deploy:restart'
+after 'deploy:rollback', 'deploy:restart'
+
+namespace :deploy do
+  desc "Restart app"
+    task :restart do
+    on role(:app) do
+      say "Restarting Unicorn..."
+      execute "RAILS_ENV=production bundle exec unicorn --daemonize --config-file config/unicorn.rb"
+    end
   end
 end
 
