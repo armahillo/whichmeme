@@ -71,7 +71,8 @@ after 'deploy:finishing', 'deploy:restart'
 namespace :deploy do
   desc 'Restart Unicorn'
   task :restart do
-    on role(:app)    do
+    on role(:app) do
+      say "Restarting Unicorn..."
       execute "RAILS_ENV=production bundle exec unicorn --daemonize --config-file config/unicorn.rb"
     end
   end
