@@ -9,6 +9,8 @@
 /.env
 /data/**/*
 /public/system/**/*
+/bin/*
+vendor/**/*
 
 # Ignore all logfiles and tempfiles.
 /log/*
