@@ -44,8 +44,8 @@ after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
 
-  task :restart do
-    invoke 'unicorn:reload'
+  task :restart => :environemnt do
+    run "RAILS_ENV=#{ENV['RAILS_ENV']} bundle exec unicorn --daemonize --config-file config/unicorn.rb"
   end
 
   after :restart, :clear_cache do
