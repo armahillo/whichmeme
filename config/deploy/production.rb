@@ -33,7 +33,7 @@ role :db,  %w{deploy@45.55.181.42}
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :deploy_to, "/home/deploy/apps/whichmeme"
 
 # Custom SSH Options
 # ==================
