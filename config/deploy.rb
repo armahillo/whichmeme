@@ -44,9 +44,9 @@ after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
 
-  task :restart do
-    run "RAILS_ENV=production bundle exec unicorn --daemonize --config-file config/unicorn.rb"
-  end
+#  task :restart do
+#    run "RAILS_ENV=production bundle exec unicorn --daemonize --config-file config/unicorn.rb"
+#  end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
@@ -57,4 +57,28 @@ namespace :deploy do
     end
   end
 
+end
+
+set :rails_env, :production
+set :unicorn_binary, "bundle exec unicorn"
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+
+namespace :deploy do
+  task :start, :roles => :app, :except => { :no_release => true } do 
+    run "cd #{current_path} && #{try_sudo} #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
+  end
+  task :stop, :roles => :app, :except => { :no_release => true } do 
+    run "#{try_sudo} kill `cat #{unicorn_pid}`"
+  end
+  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill -s QUIT $(< #{unicorn_pid})"
+  end
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill USR2 $(< #{unicorn_pid})"
+  end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    stop
+    start
+  end
 end
