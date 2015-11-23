@@ -1,7 +1,7 @@
 <h1>Meme Templates</h1>
 
 <div class="col-md-8">
-<h3>Established Memes</h3>
+<h3>Established Memes (more than 5 instances)</h3>
   <div class="established meme_types">
   <%- @established.each { |mt| %>
         <%= link_to image_tag(mt.template(:tiny)), meme_type_path(mt) %>

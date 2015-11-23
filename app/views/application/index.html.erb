@@ -1,0 +1,14 @@
+<table id="meme_type_stats">
+  <thead>
+    <tr><th>&nbsp;</th><th>Meme Type</th><th>Count</th></tr>
+  </thead>
+  <tbody>
+    <%- @meme_types.each  do |mt| %>
+      <tr>
+        <td><%= image_tag mt.template.url(:tiny) %></td>
+        <td><%= link_to mt.name, meme_type_path(mt) %></td>
+        <td><%= mt.instance_count %></td>
+      </tr>
+    <%- end %>
+  </tbody>
+</table>

@@ -1,9 +1,10 @@
 <h1><%= @meme_type.name %></h1>
 <%= image_tag @meme_type.template.url(:medium) %>
+<p><%= @meme_type.instance_count %> submissions.</p>
 <table id="memes" class="table striped">
   <%- @memes.each do |m| %> 
     <tr id="<%= m.id %>">
-      <td><%= m.link_title %></td>
+      <td><%= link_to m.link_title, meme_path(m) %></td>
       <td><%= m.meme_caption %></td>
     </tr>
   <%- end %>
