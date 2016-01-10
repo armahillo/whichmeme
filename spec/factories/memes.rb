@@ -24,20 +24,20 @@
 
 FactoryGirl.define do
   factory :meme do
-    reddit_id "MyString"
-    link_id "MyString"
-    body "MyText"
+    sequence(:reddit_id) { |n| "abcdef#{n}" }
+    sequence(:link_id) { |n| "t3_#{n}#{n}abc" }
+    body "**Philosoraptor**\r\n\r\n&gt; - IF BAY WATCH WAS A SHOW IN CURRENT TIMES\r\n\r\n&gt; - WOULD IT BE CALLED BAE WATCH?\r\n\r\n"
     meme_type
-    meme_caption "MyString"
-    link_title "MyString"
-    subreddit "MyString"
-    subreddit_id "MyString"
-    created_utc 1.0
-    source "MyString"
-    thumbnail "MyString"
-    score 0
-    ups 0
-    link_created_utc 1.0
-    title "MyString"
+    meme_caption "[\"If bay watch was a show in current times\", \"Would it be called bae watch?\"]"
+    link_title "Probably how it would of been named."
+    subreddit "AdviceAnimals"
+    subreddit_id "t5_2s7tt"
+    created_utc { DateTime.now.utc.to_i }
+    source nil
+    thumbnail nil
+    score nil
+    ups nil
+    link_created_utc nil
+    title nil
   end
 end

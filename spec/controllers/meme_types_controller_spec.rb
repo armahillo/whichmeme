@@ -10,8 +10,9 @@ RSpec.describe MemeTypesController, type: :controller do
   end
 
   describe "GET #show" do
+    let!(:meme_type) { create(:meme_type) }
     it "returns http success" do
-      get :show
+      get :show, id: meme_type
       expect(response).to have_http_status(:success)
     end
   end

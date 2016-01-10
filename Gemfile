@@ -39,7 +39,9 @@ gem 'snooby'
 gem 'activeadmin', github: 'activeadmin'
 
 # User management
+gem 'cancancan', '~> 1.10'
 gem 'devise'
+gem 'omniauth-facebook'
 
 # Use Unicorn as the app server
 group :production do

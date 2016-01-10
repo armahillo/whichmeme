@@ -12,7 +12,7 @@ ActiveAdmin.register Meme do
 
   # Custom Actions
   batch_action :change_meme_type, form: { 
-      meme_type: MemeType.established.order(:slug).collect { |mt| [mt.name, mt.id] }, 
+      meme_type: proc { MemeType.established.order(:slug).collect { |mt| [mt.name, mt.id] } }, 
       new_meme_name: :text 
     },
     method: :patch do |ids, inputs|
