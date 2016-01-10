@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_user_metadata
-  	return unless current_user.present?
+  	return unless user_signed_in?
     @user_metadata = {}
     @user_metadata["games"] = {}
     @user_metadata["games"]["memetype_association"] = Games::MemetypeAssociation.by_user(current_user.id).count
