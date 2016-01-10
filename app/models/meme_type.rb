@@ -16,6 +16,7 @@
 
 class MemeType < ActiveRecord::Base
   has_many :memes
+  has_many :memetype_associations, class_name: 'Games::MemetypeAssociation'
 
   has_attached_file :template, 
                      styles: { large: "500x500>", medium: "300x300>", thumb: "100x100>", tiny: "30x30#" }, 

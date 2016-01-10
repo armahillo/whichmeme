@@ -40,6 +40,25 @@ ActiveAdmin.register Meme do
       redirect_to :back
   end
 
+  show title: :id do |m|
+    attributes_table do
+      row :link_title
+      row :meme_caption
+      row :template do
+        image_tag(m.meme_type.template.url(:thumb))
+      end
+      row :MTA_Occurrences do
+        m.memetype_associations.count
+      end
+    end
+  
+    table_for m.memetype_associations do |mta|
+      column(:user) { |mta| link_to mta.user.name, admin_user_path(mta.user) }
+      column(:meme_type) { |mta| link_to mta.meme_type.name, admin_meme_type_path(mta.meme_type) }
+      column(:correct) { |mta| mta.correct_meme_id == mta.meme_id ? "Yes"  : "No" }
+    end
+  end
+
   index do
     selectable_column
     id_column

@@ -61,11 +61,21 @@ ActiveAdmin.register MemeType do
       row :template do
         image_tag(mt.template.url(:thumb))
       end
+      row :MTA_Correctly_Guessed do
+        correct = Games::MemetypeAssociation.by_meme_type(mt.id).correct.count
+        incorrect = Games::MemetypeAssociation.by_meme_type(mt.id).incorrect.count
+        total = correct + incorrect
+        if (total > 0)
+          "#{(correct / total) * 100}% (#{correct} correct of #{total})"
+        else
+          "None yet."
+        end
+      end
     end
   
     table_for mt.memes do
-      column(:link_title) { |m| link_to m.link_title, edit_admin_meme_path(m) }
-      column :meme_caption
+      column(:link_title) { |m| link_to m.link_title, admin_meme_path(m) }
+      column(:meme_caption) { |m| link_to m.meme_caption, edit_admin_meme_path(m) }
       column("Link") { |m| link_to m.to_url, m.to_url }
     end
   end
