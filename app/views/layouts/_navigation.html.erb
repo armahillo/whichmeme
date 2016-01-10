@@ -1,4 +1,9 @@
 <ul id="nav" role="navigation">
   <li><%= link_to_unless_current 'Home', root_path %></li>
   <%= render 'layouts/navigation_links' %>
+  <%- if user_signed_in? %>
+   <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+  <%- else %>
+    <li> <%= link_to 'Sign In', new_user_session_path %></li>
+  <%- end %>
 </ul>

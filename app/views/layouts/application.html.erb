@@ -11,6 +11,7 @@
   <body>
     <header>
       <%= render 'layouts/navigation' %>
+      <%= render 'layouts/user_data' if user_signed_in? %>
     </header>
     <main role="main">
       <%= render 'layouts/messages' %>

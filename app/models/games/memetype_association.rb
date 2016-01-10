@@ -21,4 +21,5 @@ class Games::MemetypeAssociation < ActiveRecord::Base
   # The actual meme
   has_one :correct_meme, class_name: "Meme", foreign_key: "correct_meme_id"
 
+  scope :by_user, ->(user_id) { where(user_id: user_id) }
 end

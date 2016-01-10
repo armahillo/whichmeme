@@ -1,7 +1,7 @@
 class Games::MemetypeAssociationsController < ApplicationController
-  def new
-    current_user = 1
+  load_and_authorize_resource
 
+  def new
     @target_meme = Meme.includes(:meme_type).established.where('memes.id not in (SELECT id FROM memetype_associations WHERE user_id = ?)', current_user).order("RANDOM()").first
     @meme_type = @target_meme.meme_type
     @memes = [@target_meme]
@@ -20,9 +20,8 @@ class Games::MemetypeAssociationsController < ApplicationController
 
     correct_meme_id = Meme.where('meme_type_id = ? AND id IN (?,?,?)', meme_type_id, meme1, meme2, meme3).first.id
     
-    memetype_association = Games::MemetypeAssociation.new(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_id: correct_meme_id)
+    memetype_association = Games::MemetypeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_id: correct_meme_id, user: current_user)
 
-    Rails.logger.info(memetype_association.inspect)
     redirect_to :back
   end
 end
