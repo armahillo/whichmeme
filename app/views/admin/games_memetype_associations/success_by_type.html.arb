@@ -1,0 +1,6 @@
+table_for assigns[:successes] do |s|
+   column(:meme_type) { |data| link_to data[1], admin_meme_type_path(data[0]) }
+   column(:successes) { |data| data[2] }
+   column(:trials) { |data| data[3] }
+   column(:success_rate) { |data| data[4] }
+end

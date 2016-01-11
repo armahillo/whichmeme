@@ -66,7 +66,7 @@ ActiveAdmin.register MemeType do
         incorrect = Games::MemetypeAssociation.by_meme_type(mt.id).incorrect.count
         total = correct + incorrect
         if (total > 0)
-          "#{(correct / total) * 100}% (#{correct} correct of #{total})"
+          "#{(correct.to_f / total) * 100}% (#{correct} correct of #{total})"
         else
           "None yet."
         end

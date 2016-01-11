@@ -12,8 +12,15 @@ ActiveAdmin.register Games::MemetypeAssociation do
   scope :correct
   scope :incorrect
 
+  sidebar :statistics do
+    ul do
+      li link_to("Success by type", success_by_type_admin_games_memetype_associations_path)
+      li link_to("Failure by type", failure_by_type_admin_games_memetype_associations_path)
+    end
+  end
 
-  index do
+
+  index title: "Memetype Association Game" do
     selectable_column
     id_column
     column :meme_type do |m|
@@ -33,12 +40,20 @@ ActiveAdmin.register Games::MemetypeAssociation do
       link_to m.correct_meme.meme_type.name, admin_meme_path(m.correct_meme_id)
     end
     column :chose_correctly do |m|
-      m.correct_meme_id == m.meme_id ? "Yes" : "No"
+      m.correct_meme_id == m.meme_id ? status_tag("Yes", :ok) : status_tag("No")
     end
     column :created_at do |m|
       Time.at(m.created_at)
     end
     actions
+  end
+
+  collection_action :success_by_type do
+    @successes = Games::MemetypeAssociation.success_by_type
+  end
+
+  collection_action :failure_by_type do
+    @failures = Games::MemetypeAssociation.failure_by_type
   end
 
 

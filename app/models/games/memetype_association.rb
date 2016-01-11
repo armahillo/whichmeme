@@ -32,4 +32,28 @@ class Games::MemetypeAssociation < ActiveRecord::Base
   def self.meme_types 
   	self.where()
   end
+
+  def self.success_by_type
+    successes = Games::MemetypeAssociation.joins(:meme_type).correct.group(:meme_type_id).count
+    totals = Games::MemetypeAssociation.joins(:meme_type).group(:meme_type_id).count
+    MemeType.select(:id,:name).where(id: successes.keys).collect { |r| [r.id, r.name, successes[r.id], totals[r.id], (successes[r.id].to_f/totals[r.id])] }.sort { |a,b| a[4] <=> b[4] }.reverse
+  end
+
+  def self.failure_by_type
+    failures = Games::MemetypeAssociation.joins(:meme_type).incorrect.group(:meme_type_id).count
+    totals = Games::MemetypeAssociation.joins(:meme_type).group(:meme_type_id).count
+    MemeType.select(:id,:name).where(id: failures.keys).collect { |r| [r.id, r.name, failures[r.id], totals[r.id], (failures[r.id].to_f/totals[r.id])] }.sort { |a,b| a[4] <=> b[4] }.reverse
+  end
+
+  def self.user_success_by_type(user_id)
+    successes = Games::MemetypeAssociation.joins(:user).joins(:meme_type).by_user(user_id).correct.group(:meme_type_id).count
+    totals = Games::MemetypeAssociation.joins(:meme_type).group(:meme_type_id).count
+    MemeType.select(:id,:name).where(id: successes.keys).collect { |r| [r.id, r.name, successes[r.id], totals[r.id], (successes[r.id].to_f/totals[r.id])] }.sort { |a,b| a[4] <=> b[4] }.reverse
+  end
+
+  def self.user_failure_by_type(user_id)
+    failures = Games::MemetypeAssociation.joins(:user).joins(:meme_type).by_user(1).incorrect.group(:meme_type_id).count
+    totals = Games::MemetypeAssociation.joins(:meme_type).group(:meme_type_id).count
+    MemeType.select(:id,:name).where(id: failures.keys).collect { |r| [r.id, r.name, failures[r.id], totals[r.id], (failures[r.id].to_f/totals[r.id])] }.sort { |a,b| a[4] <=> b[4] }.reverse
+  end
 end
