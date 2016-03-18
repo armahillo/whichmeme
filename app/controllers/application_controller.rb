@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def index
+    @recent_news = News.order('updated_at DESC').limit(3)
   	@meme_types = MemeType.order('instance_count DESC')
   end
 

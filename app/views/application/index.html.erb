@@ -1,3 +1,15 @@
+<%- if @recent_news.count > 0 %>
+<section id="news">
+<h3>Recent Updates</h3>
+<%- @recent_news do |news| %>
+  <h4><%= news.title %></h4>
+  <p><%= news.content %></p>
+<%- end %>
+</section>
+<%- end %>
+
+<section id="meme_type_collection">
+<h3>Meme Type Collection</h3>
 <table id="meme_type_stats">
   <thead>
     <tr><th>&nbsp;</th><th>Meme Type</th><th>Count</th></tr>
@@ -12,3 +24,4 @@
     <%- end %>
   </tbody>
 </table>
+</section>
