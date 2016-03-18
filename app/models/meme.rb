@@ -31,6 +31,8 @@ class Meme < ActiveRecord::Base
 
   scope :established, -> { joins(:meme_type).where('meme_types.instance_count > 5') }
   scope :long_tail, -> { joins(:meme_type).where('meme_types.instance_count <= 5') }
+  scope :spellcheck, -> { where(spellcheck: true) }
+  scope :language, -> { where(language: true) }
 
   def to_url
     l = self.try(:link_id).split("_")[1] rescue nil
