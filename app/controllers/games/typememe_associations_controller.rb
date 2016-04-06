@@ -42,7 +42,7 @@ class Games::TypememeAssociationsController < ApplicationController
     
     typememe_association = Games::TypememeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_type_id: correct_meme_type_id, user: current_user)
 
-    redirect_to :back
+    redirect_to new_games_typememe_association_path, status: 303 and return
 
   end
 end

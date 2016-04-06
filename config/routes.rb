@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   resources :meme_types, only: [:index, :show]
 
   namespace :games do
-    resources :memetype_associations, only: [:new, :create]
-    resources :typememe_associations, only: [:new, :create]
+    resource :memetype_association, only: [:new, :create]
+    resource :typememe_association, only: [:new, :create]
   end
 
   # Example of regular route:

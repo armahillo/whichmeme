@@ -46,6 +46,7 @@ class Games::MemetypeAssociationsController < ApplicationController
     
     # Store the data and allow the user to continue
     memetype_association = Games::MemetypeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_id: correct_meme_id, user: current_user)
-    redirect_to :back
+
+    redirect_to :back, status: 303
   end
 end

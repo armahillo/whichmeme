@@ -2,7 +2,7 @@
 
 <p>Which of these seems correct to you?</p>
 
-<%= form_for(games_typememe_associations_path) do %>
+<%= form_for(@typememe_association, url: games_typememe_association_path, method: :post) do %>
   <% @meme_types.each do |meme_type| %>
     <div class="col-md-4">
       <label for="" style="margin: 0 auto; text-align: center;">
