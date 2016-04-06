@@ -20,6 +20,8 @@
 #  title            :string(1024)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  spellcheck       :boolean
+#  language         :boolean
 #
 
 class Meme < ActiveRecord::Base
@@ -30,6 +32,7 @@ class Meme < ActiveRecord::Base
   validates_uniqueness_of [:reddit_id, :link_id]
 
   scope :established, -> { joins(:meme_type).where('meme_types.instance_count > 5') }
+  scope :with_image, -> { joins(:meme_type).where('meme_types.template_file_name IS NOT NULL') }
   scope :long_tail, -> { joins(:meme_type).where('meme_types.instance_count <= 5') }
   scope :spellcheck, -> { where(spellcheck: true) }
   scope :language, -> { where(language: true) }

@@ -11,9 +11,8 @@ RSpec.describe Games::MemetypeAssociationsController, type: :controller do
   	context "While signed in" do
       before(:each) do
       	sign_in :user, create(:user)
-      	mt = create(:meme_type)
+      	create_established_memetype
       	2.times { create(:meme) }
-      	6.times { create(:meme, meme_type: mt) }
       end
       it "is successful" do
       	get :new

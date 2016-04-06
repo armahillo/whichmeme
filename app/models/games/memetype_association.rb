@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: memetype_associations
+# Table name: games_memetype_associations
 #
 #  id              :integer          not null, primary key
 #  user_id         :integer

@@ -17,6 +17,7 @@
 FactoryGirl.define do
   factory :meme_type do
     sequence(:name) { |n| "Confession Bear #{n}" }
+    template_file_name { '/spec/fixtures/placeholder_meme_template.jpg' }
   end
 
 end

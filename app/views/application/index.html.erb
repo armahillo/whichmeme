@@ -1,25 +1,28 @@
 <%- if @recent_news.count > 0 %>
-<section id="news">
-<h3>Recent Updates</h3>
-<%- @recent_news do |news| %>
-  <h4><%= news.title %></h4>
-  <p><%= news.content %></p>
-<%- end %>
-</section>
+  <section id="news">
+  <h3>Recent Updates</h3>
+  <%- @recent_news.each do |news| %>
+    <h4><%= news.title %></h4>
+    <p><%= news.content %></p>
+  <%- end %>
+  </section>
 <%- end %>
 
 <section id="meme_type_collection">
 <h3>Meme Type Collection</h3>
 <table id="meme_type_stats">
   <thead>
-    <tr><th>&nbsp;</th><th>Meme Type</th><th>Count</th></tr>
+    <tr><th>&nbsp;</th><th>Meme Type</th><th>Count (% of <%= @meme_count %> total)</th></tr>
   </thead>
   <tbody>
     <%- @meme_types.each  do |mt| %>
-      <tr>
+    <%-   portion = ((mt.instance_count.to_f / @meme_count) * 100.0).round(2) 
+          row_style = portion.to_i > 0 ? "" : "insignificant"  
+          row_style = portion.to_i > 1 ? "significant" : row_style %>
+      <tr class="<%= row_style %>">
         <td><%= image_tag mt.template.url(:tiny) %></td>
         <td><%= link_to mt.name, meme_type_path(mt) %></td>
-        <td><%= mt.instance_count %></td>
+        <td><%= mt.instance_count %> ( <%= portion %>% )</td>
       </tr>
     <%- end %>
   </tbody>

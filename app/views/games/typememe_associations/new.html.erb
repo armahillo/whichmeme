@@ -1,0 +1,23 @@
+<h1>Type->Meme Association Game</h1>
+
+<p>Which of these seems correct to you?</p>
+
+<%= form_for(games_typememe_associations_path) do %>
+  <% @meme_types.each do |meme_type| %>
+    <div class="col-md-4">
+      <label for="" style="margin: 0 auto; text-align: center;">
+      <%= render partial: "memes/meme_medium", object: @meme, locals: { meme_type: meme_type, no_link: true } %>
+      <div style="clear:both;">
+      
+        <%= radio_button "typememe_association", "meme_type_id", meme_type.id %> 
+        <span>this one</span>
+      
+      </div>
+      </label>
+    </div>
+  <% end %>
+  <br style="clear:both;" />
+  <%= hidden_field_tag "meme_id", @meme.id %>
+  <%= hidden_field_tag "meme_type_ids", @meme_types.collect { |m| m.id }.join(",") %>
+  <%= submit_tag "Next >" %>
+<% end %>

@@ -17,6 +17,7 @@
 class MemeType < ActiveRecord::Base
   has_many :memes
   has_many :memetype_associations, class_name: 'Games::MemetypeAssociation'
+  has_many :typememe_associations, class_name: 'Games::TypememeAssociation'
 
   has_attached_file :template, 
                      styles: { large: "500x500>", medium: "300x300>", thumb: "100x100>", tiny: "30x30#" }, 
@@ -30,6 +31,7 @@ class MemeType < ActiveRecord::Base
 
   scope :established, -> { where('instance_count > 5') }
   scope :long_tail, -> { where('instance_count <= 5') }
+  scope :with_image, -> { where('template_file_name IS NOT NULL') }
 
   def absorb!(id)
     return if id == self.id

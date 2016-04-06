@@ -1,4 +1,7 @@
 <%# add navigation links to this file %>
-<li><%= link_to_unless_current "Types", meme_types_path %></li>
-<li><%= link_to_unless_current "Memes", memes_path %></li>
-<li><%= link_to_unless_current "Memetype Association", new_games_memetype_association_path %></li>
+<li><%= fa_icon 'th' %> <%= link_to_unless_current "Types", meme_types_path %></li>
+<li><%= fa_icon 'archive' %> <%= link_to_unless_current "Memes", memes_path %></li>
+<li><%= fa_icon 'lock', class: "signin_required" %>
+    <%= fa_icon 'gavel', class: "when_signedin" %> <%= link_to_unless_current "Which Text Fits?", new_games_memetype_association_path, title: "Requires Sign-in" %></li>
+<li><%= fa_icon 'lock', class: "signin_required" %>
+    <%= fa_icon 'gavel', class: "when_signedin" %> <%= link_to_unless_current "Which Meme Fits?", new_games_typememe_association_path, title: "Requires Sign-in" %></li>

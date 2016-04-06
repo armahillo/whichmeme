@@ -20,6 +20,8 @@
 #  title            :string(1024)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  spellcheck       :boolean
+#  language         :boolean
 #
 
 require 'rails_helper'

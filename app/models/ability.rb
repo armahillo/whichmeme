@@ -10,6 +10,7 @@ class Ability
 
     if (user.id.present?)
         can [:new, :create], Games::MemetypeAssociation
+        can [:new, :create], Games::TypememeAssociation
     end
     #   if user.admin?
     #     can :manage, :all

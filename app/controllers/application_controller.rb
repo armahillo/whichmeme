@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def index
     @recent_news = News.order('updated_at DESC').limit(3)
   	@meme_types = MemeType.order('instance_count DESC')
+    @meme_count = Meme.count
   end
 
   def load_user_metadata

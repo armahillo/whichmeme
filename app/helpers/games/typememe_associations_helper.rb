@@ -1,0 +1,2 @@
+module Games::TypememeAssociationsHelper
+end

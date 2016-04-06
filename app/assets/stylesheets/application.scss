@@ -16,3 +16,35 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+
+ul#nav li a {
+	padding-left: 3px;
+	padding-right: 0px;
+}
+ul#nav li {
+	padding-right: 12px;
+}
+
+body#application.index table#meme_type_stats tr.significant td {
+  font-weight: bold;
+}
+body#application.index table#meme_type_stats tr.insignificant td {
+  color: #AAA;
+}
+
+/* For page elements that should only display when the user is signed in */
+.when_signedin {
+    display: none;
+}
+
+/* If the user is signed in (and it requires signin) OR if the element should only
+   display when the user is NOT signed in */
+.sign_in_required,
+body.signed_in .when_signedin { 
+	display: inline;
+}
+
+body.signed_in .signin_required {
+    display: none;
+}
