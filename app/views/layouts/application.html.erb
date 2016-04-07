@@ -7,6 +7,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <script>
+<%- if Rails.env.production? %>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -16,6 +17,10 @@
   ga('require', 'linkid')
   ga('send', 'pageview');
 
+<%- end %>
+<%- if (flash[:track].present? && flash[:correct].present?) %>
+    track_game_submission('<%= flash[:track] %>', '<%= flash[:correct] %>');
+<%- end %>
 </script>
     <%= csrf_meta_tags %>
   </head>

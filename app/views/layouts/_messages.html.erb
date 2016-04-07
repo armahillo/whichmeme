@@ -1,5 +1,5 @@
 <% flash.each do |name, msg| %>
-  <% if msg.is_a?(String) %>
+  <% if msg.is_a?(String) && ["error", "notice", "success"].include?(name) %>
     <%= content_tag :div, msg, :class => "flash_#{name}" %>
   <% end %>
 <% end %>

@@ -20,5 +20,6 @@ class ApplicationController < ActionController::Base
     @user_metadata = {}
     @user_metadata["games"] = {}
     @user_metadata["games"]["memetype_association"] = Games::MemetypeAssociation.by_user(current_user.id).count
+    @user_metadata["games"]["typememe_association"] = Games::TypememeAssociation.by_user(current_user.id).count
   end
 end

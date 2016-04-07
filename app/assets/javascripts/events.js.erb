@@ -1,0 +1,13 @@
+function track_game_submission(gametype, correct) {
+	<% if Rails.env.production? %>
+	ga('send', {
+		hitType: 'event',
+		eventCategory: 'game', 
+		eventAction: 'submit',
+		eventLabel: gametype, 
+		eventValue: correct,
+		transport: 'beacon'
+	});
+	<% end %>
+	console.log("Recording: " + gametype + ", " + correct);
+}

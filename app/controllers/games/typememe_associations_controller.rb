@@ -17,17 +17,23 @@ class Games::TypememeAssociationsController < ApplicationController
     # First, we'll identify a meme that is from an established type that also has an image (the image is a necessary component), and
     # ensure the user has not already seen that meme's text.
     @meme = Meme.includes(:meme_type).established.with_image.where("memes.id not in (SELECT meme_id FROM #{Games::TypememeAssociation.table_name} WHERE user_id = ?)", current_user).order("RANDOM()").first
-    # Use that meme type as the basis.
-    @target_meme_type = @meme.meme_type
-    @meme_types = [@target_meme_type]
-    # Identify a different meme type that we've not seen yet
-    @meme_types << MemeType.established.with_image.where('id != ?', @target_meme_type.id).order("RANDOM()").first
-    # And one more time...
-    @meme_types << MemeType.established.with_image.where('id not in (?,?)', *@meme_types.collect { |mt| mt.id } ).order("RANDOM()").first
-    # Randomize them
-    @meme_types.shuffle!
-    # Seed the object -- this information is stored as hidden fields in the form.
-    @typememe_association = Games::TypememeAssociation.new(user_id: current_user, correct_meme_type_id: @target_meme_type.id)
+    begin
+      raise Exception.new("No unseen meme types remaining!") if @meme.nil?
+      # Use that meme type as the basis.
+      @target_meme_type = @meme.meme_type
+      @meme_types = [@target_meme_type]
+      # Identify a different meme type that we've not seen yet
+      @meme_types << MemeType.established.with_image.where('id != ?', @target_meme_type.id).order("RANDOM()").first
+      # And one more time...
+      @meme_types << MemeType.established.with_image.where('id not in (?,?)', *@meme_types.collect { |mt| mt.id } ).order("RANDOM()").first
+      # Randomize them
+      @meme_types.shuffle!
+      # Seed the object -- this information is stored as hidden fields in the form.
+      @typememe_association = Games::TypememeAssociation.new(user_id: current_user, correct_meme_type_id: @target_meme_type.id)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to root_path
+    end
   end
 
   def create
@@ -36,12 +42,14 @@ class Games::TypememeAssociationsController < ApplicationController
     # All three meme_Type_ids displayed
     meme_type1, meme_type2, meme_type3 = params[:meme_type_ids].split(",")
     # The selected meme type from the user
-    meme_type_id = params[:typememe_association][:meme_type_id]
+    meme_type_id = params[:typememe_association][:meme_type_id].to_i
     # Which type is correct?
-    correct_meme_type_id = Meme.where('id = ? AND meme_type_id IN (?,?,?)', meme_id, meme_type1, meme_type2, meme_type3).first.id
+    correct_meme_type_id = Meme.where('id = ? AND meme_type_id IN (?,?,?)', meme_id, meme_type1, meme_type2, meme_type3).first.meme_type.id
     
     typememe_association = Games::TypememeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_type_id: correct_meme_type_id, user: current_user)
 
+    flash[:correct] = (correct_meme_type_id == meme_type_id ? 1 : 0)
+    flash[:track] = "typememe"
     redirect_to new_games_typememe_association_path, status: 303 and return
 
   end
