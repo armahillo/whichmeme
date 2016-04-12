@@ -1,14 +1,21 @@
 ActiveAdmin.register Meme do
 
   # Config
-  permit_params :meme_type_id, :body, :meme_caption, :link_title, :subreddit, :created_utc, :source, :thumbnail, :score, :ups, :link_created_utc, :title
+  permit_params :meme_type_id, :body, :meme_caption, :link_title, :subreddit, :created_utc, :source, :thumbnail, :score, :ups, :link_created_utc, :title, :flag
+
+  scope :all
+  scope :flagged
+  scope :established
+  scope :long_tail
 
   # Filters
-  filter :meme_type
+  filter :meme_type, collection: proc { MemeType.order(:name) }
+  filter :flag
   filter :meme_caption
   filter :link_title
   filter :created_utc
   filter :link_created_utc
+  filter :flagged_by, collection: proc { User.order(:name) }
 
   # Custom Actions
   batch_action :change_meme_type, form: { 

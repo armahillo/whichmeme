@@ -1,0 +1,3 @@
+$('.meme-<%= @meme.id %>').html('<span class="response"><%= fa_icon("check-square") %></span>');
+show_flash('notice', "<%= flash[:notice] %>");
+fade_notice();

@@ -1,0 +1,6 @@
+<%- if user_signed_in? && !flag.flag? %>
+<div class="flag meme-<%= flag.id %>"><%= fa_icon 'flag' %><%= link_to "Flag for Review", flag_meme_path(flag), method: :patch, title: "Bad language, misspellings, or other anomalies", remote: true %>
+</div>
+<% elsif flag.flag? %>
+  <span class="flagged"><%= fa_icon("flag") %></span>
+<% end %>

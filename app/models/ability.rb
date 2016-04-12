@@ -9,6 +9,7 @@ class Ability
     can :read, [Meme, MemeType]
 
     if (user.id.present?)
+        can [:flag], Meme
         can [:new, :create], Games::MemetypeAssociation
         can [:new, :create], Games::TypememeAssociation
     end

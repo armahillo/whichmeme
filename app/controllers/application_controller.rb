@@ -9,6 +9,14 @@ class ApplicationController < ActionController::Base
   	redirect_to new_user_session_path, alert: e.message
   end
 
+  def about
+  end
+
+  def news
+    @news = News.all.order('created_at DESC')
+  end
+
+
   def index
     @recent_news = News.order('updated_at DESC').limit(3)
   	@meme_types = MemeType.order('instance_count DESC')

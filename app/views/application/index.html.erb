@@ -1,10 +1,9 @@
 <%- if @recent_news.count > 0 %>
   <section id="news">
   <h3>Recent Updates</h3>
-  <%- @recent_news.each do |news| %>
-    <h4><%= news.title %></h4>
-    <p><%= news.content %></p>
-  <%- end %>
+  <%= render partial: "news_item", collection: @recent_news %>
+  <hr />
+  <%= link_to "View all news ...", news_path %>
   </section>
 <%- end %>
 

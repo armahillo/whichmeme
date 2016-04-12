@@ -13,8 +13,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root to:'application#index'
+  get 'about', to: 'application#about'
+  get 'news', to: 'application#news'
 
-  resources :memes, only: [:index, :show]
+  resources :memes, only: [:index, :show] do
+    patch 'flag', on: :member
+  end
 
   resources :meme_types, only: [:index, :show]
 

@@ -24,7 +24,7 @@ namespace :import do
       print "."
     end
     new_meme_type_count = MemeType.count - start_memetype_count
-    if (new_memes.count > 0)
+    if (new_memes.keys.count > 0)
       News.create(title: "#{new_meme_type_count} new meme types found!",
                 content: new_memes.collect { |type,count| "#{count} #{type} instances\n" })
     end

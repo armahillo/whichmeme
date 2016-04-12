@@ -1,5 +1,6 @@
 <ul id="nav" role="navigation">
   <li><%= fa_icon "home" %> <%= link_to_unless_current 'Home', root_path %></li>
+  <li><%= fa_icon "info" %> <%= link_to_unless_current 'About', about_path %></li>
   <%= render 'layouts/navigation_links' %>
   <%- if user_signed_in? %>
    <li><%= fa_icon "sign-out" %><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>

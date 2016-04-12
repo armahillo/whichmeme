@@ -24,7 +24,7 @@
 </script>
     <%= csrf_meta_tags %>
   </head>
-  <body id="<%= params[:controller] %>" class="<%= params[:action] %> <%= user_signed_in? ? 'signed_in' : '' %>">
+  <body id="<%= params[:controller].gsub(/[^A-Za-z0-9]/,"_") %>" class="<%= params[:action] %> <%= user_signed_in? ? 'signed_in' : '' %>">
     <header>
       <%= render 'layouts/navigation' %>
       <%= render 'layouts/user_data' if user_signed_in? %>

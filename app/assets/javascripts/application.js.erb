@@ -15,3 +15,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+function show_flash(type, msg) {
+  f = $('<div/>').html(msg).addClass('flash_' + type)
+  console.log(f);
+  $("#flash").append(f);
+  $("#flash").show();
+}
+function fade_notice() {
+  $('.flash_notice').fadeIn(400).delay(4000).fadeOut(1000).remove();	
+}
+$(document).ready(function() {
+  fade_notice();
+});

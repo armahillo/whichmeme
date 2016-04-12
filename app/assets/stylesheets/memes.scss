@@ -97,3 +97,23 @@ article.meme.medium .template p.top {
 article.meme.medium .template p.bottom {
   bottom: 6px;
 }
+
+.meme .flag {
+  color: #999;
+  text-align: left;
+}
+.meme .flag i,
+.meme .flagged i {
+  margin: 0 3px;
+}
+.meme .flag a {
+  color: #AAA;
+  font-size: 14px;
+  text-decoration: none;
+}
+.meme .response {
+  color: green;
+}
+.meme .flagged {
+  color: red;
+}

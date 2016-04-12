@@ -2,7 +2,22 @@ ActiveAdmin.register_page "Dashboard" do
 
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
+
   content title: proc{ I18n.t("active_admin.dashboard") } do
+    columns do
+      column do
+          panel "Flagged for Review" do
+            table_for Meme.flagged do |m|
+              column(:actions) { |m| link_to "Edit", edit_admin_meme_path(m) }
+              column(:meme_type) { |m| m.meme_type.name }
+              column(:title)
+              column(:meme_caption) { |m| JSON.parse(m.meme_caption).join("<br/>").html_safe }
+              column(:flagged_by) { |m| m.flagged_by.try(:name) rescue "unknown" }
+            end
+          end
+      end
+    end
+
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do
         span I18n.t("active_admin.dashboard_welcome.welcome")

@@ -48,3 +48,36 @@ body.signed_in .when_signedin {
 body.signed_in .signin_required {
     display: none;
 }
+
+body#devise_sessions.new a.authbutton {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+}
+body#devise_sessions.new a.authbutton i.fa {
+	font-size: 24px;
+	margin-right: 8px;
+}
+
+body#devise_sessions.new a.authbutton.facebook {
+	background-color: #3b5998;
+}
+
+body.about main {
+  font-size: 20px;
+}
+body.about main h2,
+body#devise_sessions.new h2 {
+  font-weight: bold;
+  font-size: 42px;
+}
+body.about main h3,
+body#devise_sessions.new h3 {
+  font-size: 32px;
+  font-weight: bold;
+}
+body.about main h4,
+body#devise_sessions.new h4 {
+  font-size: 24px;
+  font-weight: bold;
+}

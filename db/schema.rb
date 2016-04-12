@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405221856) do
+ActiveRecord::Schema.define(version: 20160416180445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,8 +97,8 @@ ActiveRecord::Schema.define(version: 20160405221856) do
     t.string   "title",            limit: 1024
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "spellcheck"
-    t.boolean  "language"
+    t.boolean  "flag"
+    t.integer  "flagged_by_id"
   end
 
   create_table "news", force: :cascade do |t|

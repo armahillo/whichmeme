@@ -1,0 +1,60 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-1">
+<h2>Log in</h2>
+<% if Rails.env.development? %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end -%>
+
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div></div>
+
+
+<div class="row">
+<div class="col-md-6 col-md-offset-1">
+<hr />
+<h3>Privacy Disclosure</h3>
+<p>
+When you sign-in with Facebook, this site is provided with <em>some</em> information about you. This site will store the following information about you, purely for identification purposes within the site. We will not disclose this information to any third parties, the government, your mom, your mom's mom, or your ex.</p>
+<p>
+Should Bill Murray personally request this information in the form of a hand-decorated cake, serious consideration will be made, but you will be contacted first and offered a piece of the cake.
+</p>
+<h4>Data Captured from Facebook When You Authenticate</h4>
+<ul>
+  <li>The name you have provided Facebook <em>whether or not that is your actual name</em>. (eg. "Hannibal Lecter")</li>
+  <li>The e-mail address you have provided Facebook. (eg. "hannibal@favabrains.com")</li>
+  <li>The last IP address you signed-in from. (eg. whatever you see on <a href="http://whatsmyip.net">this third party site</a>)</li>
+</ul>
+E-mail address is collected solely as a unique identifier (as lovely and beautiful as your name is, it is possible that one of the other billions of people in the world has it; however unlikely it is that they also use this site, we need to be able to distinguish your cunning and brilliant selections separately from theirs).
+</p>
+<h4>Metadata Collected</h4>
+<p>As you use this site, some of your behaviors will be recorded for statistical purposes. This data is likely boring and unuseful, but is collected nonetheless. We are collecting:
+<ul>
+<li>Number of times you have signed in</li>
+<li>The last time you signed in</li>
+<li>How many "games" you have answered (any type)</li>
+<li>The answers you provided</li>
+</ul>
+</p>
+</div>
+</div>

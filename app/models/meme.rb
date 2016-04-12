@@ -20,13 +20,14 @@
 #  title            :string(1024)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  spellcheck       :boolean
-#  language         :boolean
+#  flag             :boolean
+#  flagged_by_id    :integer
 #
 
 class Meme < ActiveRecord::Base
   belongs_to :meme_type, counter_cache: :instance_count
   has_many :memetype_associations, class_name: Games::MemetypeAssociation
+  belongs_to :flagged_by, class_name: User
 
   validates_presence_of [:reddit_id, :link_id, :body]
   validates_uniqueness_of [:reddit_id, :link_id]
@@ -34,8 +35,7 @@ class Meme < ActiveRecord::Base
   scope :established, -> { joins(:meme_type).where('meme_types.instance_count > 5') }
   scope :with_image, -> { joins(:meme_type).where('meme_types.template_file_name IS NOT NULL') }
   scope :long_tail, -> { joins(:meme_type).where('meme_types.instance_count <= 5') }
-  scope :spellcheck, -> { where(spellcheck: true) }
-  scope :language, -> { where(language: true) }
+  scope :flagged, -> { where(flag: true) }
 
   def to_url
     l = self.try(:link_id).split("_")[1] rescue nil
