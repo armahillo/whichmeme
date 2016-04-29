@@ -48,7 +48,15 @@ class Games::TypememeAssociationsController < ApplicationController
     
     typememe_association = Games::TypememeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_type_id: correct_meme_type_id, user: current_user)
 
-    flash[:correct] = (correct_meme_type_id == meme_type_id ? 1 : 0)
+    correct = correct_meme_type_id == meme_type_id
+    current_user.increment!(:typememe_associations_correct) if correct
+
+    flash[:correct] = (correct ? 1 : 0)
+    if (correct) 
+      flash[:agree] = "They agree!"
+    else
+      flash[:disagree] = "They disagree :("
+    end
     flash[:track] = "typememe"
     redirect_to new_games_typememe_association_path, status: 303 and return
 

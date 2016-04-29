@@ -1,0 +1,7 @@
+<% overlay ||= nil %>
+<div class="meme_type">
+<%= image_tag(meme_type.template.url(:thumb)) %>
+<% if overlay %>
+  <span class="overlay"><%= overlay %></span>
+<% end %>
+</div>

@@ -53,7 +53,15 @@ class Games::MemetypeAssociationsController < ApplicationController
     # Store the data and allow the user to continue
     memetype_association = Games::MemetypeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_id: correct_meme_id, user: current_user)
 
-    flash[:correct] = (correct_meme_id == meme_id ? 1 : 0)
+    correct = correct_meme_id == meme_id
+    current_user.increment!(:memetype_associations_correct) if correct
+
+    flash[:correct] = (correct ? 1 : 0)
+    if (correct) 
+      flash[:agree] = "They agree!"
+    else
+      flash[:disagree] = "They disagree :("
+    end
     flash[:track] = "memetype"
     redirect_to :back, status: 303
   end

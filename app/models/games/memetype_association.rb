@@ -13,7 +13,7 @@
 
 class Games::MemetypeAssociation < ActiveRecord::Base
   # The user
-  belongs_to :user
+  belongs_to :user, counter_cache: :memetype_associations_count
 
   # Memetype
   belongs_to :meme_type
@@ -28,10 +28,6 @@ class Games::MemetypeAssociation < ActiveRecord::Base
   scope :correct, -> { where('meme_id = correct_meme_id') }
   scope :incorrect, -> { where('meme_id <> correct_meme_id') }
   scope :by_meme_type, ->(meme_type_id) { where(meme_type_id: meme_type_id) }
-
-  def self.meme_types 
-  	self.where()
-  end
 
   def self.success_by_type
     successes = Games::MemetypeAssociation.joins(:meme_type).correct.group(:meme_type_id).count

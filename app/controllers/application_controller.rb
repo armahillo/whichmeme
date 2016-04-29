@@ -16,9 +16,16 @@ class ApplicationController < ActionController::Base
     @news = News.all.order('created_at DESC')
   end
 
-
   def index
+    @users = User.all.limit(25)
     @recent_news = News.order('updated_at DESC').limit(3)
+    @header_meme = Meme.new
+    @header_meme.meme_type = MemeType.find_by_name("All The Things")
+    @header_meme.meme_caption = ['TEST ALL THE MEMES','']
+  end
+
+
+  def stats
   	@meme_types = MemeType.order('instance_count DESC')
     @meme_count = Meme.count
   end
@@ -27,7 +34,9 @@ class ApplicationController < ActionController::Base
   	return unless user_signed_in?
     @user_metadata = {}
     @user_metadata["games"] = {}
-    @user_metadata["games"]["memetype_association"] = Games::MemetypeAssociation.by_user(current_user.id).count
-    @user_metadata["games"]["typememe_association"] = Games::TypememeAssociation.by_user(current_user.id).count
+    @user_metadata["games"]["memetype_association"] = current_user.memetype_associations_count
+    @user_metadata["games"]["typememe_association"] = current_user.typememe_associations_count
+    @user_metadata["games"]["memetype_accuracy"] = current_user.memetype_accuracy
+    @user_metadata["games"]["typememe_accuracy"] = current_user.typememe_accuracy
   end
 end

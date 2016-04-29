@@ -15,10 +15,14 @@ Rails.application.routes.draw do
   root to:'application#index'
   get 'about', to: 'application#about'
   get 'news', to: 'application#news'
+  get 'stats', to: 'application#stats'
 
   resources :memes, only: [:index, :show] do
     patch 'flag', on: :member
   end
+
+  get 'profile', to: 'users#profile'
+  resources :users, only: [:show]
 
   resources :meme_types, only: [:index, :show]
 

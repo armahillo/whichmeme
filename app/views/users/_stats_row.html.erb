@@ -1,0 +1,5 @@
+<tr id="user-<%= stats_row.id %>" class="<%= 'mine' if(user_signed_in? && stats_row.id == current_user.id) %>">
+  <td><%= link_to stats_row.name, user_path(stats_row) %></td>
+  <td><%= number_with_precision(stats_row.memetype_accuracy*100, precision: 2) %>%</td>
+  <td><%= number_with_precision(stats_row.typememe_accuracy*100, precision: 2) %>%</td>
+</tr>

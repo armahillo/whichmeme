@@ -6,10 +6,11 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
 
-    can :read, [Meme, MemeType]
+    can :read, [Meme, MemeType, User]
 
     if (user.id.present?)
         can [:flag], Meme
+        can [:profile], User
         can [:new, :create], Games::MemetypeAssociation
         can [:new, :create], Games::TypememeAssociation
     end

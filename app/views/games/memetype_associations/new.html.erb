@@ -1,6 +1,7 @@
-<h1>Meme->Type Association Game</h1>
+<h1>Which Text Fits?</h1>
 
-<p>Which of these seems correct to you?</p>
+<p><strong>Choose the one the combination you think fits best.</strong></p>
+<p>All three captions are from real memes, but only one was written for this meme type. Can you figure out which it was?</p>
 
 <%= form_for(@memetype_association, url: games_memetype_association_path, method: :post) do %>
   <% @memes.each do |meme| %>

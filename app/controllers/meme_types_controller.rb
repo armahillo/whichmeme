@@ -1,4 +1,6 @@
 class MemeTypesController < ApplicationController
+  authorize_resource
+  
   def index
     @established = MemeType.established.order('instance_count desc')
     @long_tail = MemeType.long_tail.order('instance_count desc')

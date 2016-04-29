@@ -18,6 +18,13 @@
 @import "bootstrap";
 @import "font-awesome";
 
+body {
+  padding: 0 10px;
+}
+main {
+  padding: 0 10px;
+}
+
 ul#nav li a {
 	padding-left: 3px;
 	padding-right: 0px;
@@ -26,11 +33,39 @@ ul#nav li {
 	padding-right: 12px;
 }
 
+div#user_data {
+  margin-left:16px;
+}
+ul#user_stats_metadata {
+  display:inline;
+  list-style: none;
+}
+ul#user_stats_metadata li {
+  display:inline;
+  margin-right: 10px;
+}
+
+div.flash_agree,
+div.flash_disagree {
+  display: block;
+  font-weight: bold;
+  font-size: 24px;
+  color: white;
+  text-indent: 1em;
+}
+div.flash_agree {   background-color: green; }
+div.flash_disagree { background-color: red; }
+
 body#application.index table#meme_type_stats tr.significant td {
   font-weight: bold;
 }
 body#application.index table#meme_type_stats tr.insignificant td {
   color: #AAA;
+}
+
+body#application.index section#leaderboard table tr.mine { 
+  font-weight: bold;
+  background-color: yellow;
 }
 
 /* For page elements that should only display when the user is signed in */
@@ -80,4 +115,14 @@ body.about main h4,
 body#devise_sessions.new h4 {
   font-size: 24px;
   font-weight: bold;
+}
+
+ol#best_types {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ol#best_types li {
+  float: left;
 }

@@ -1,3 +1,44 @@
+<div class="row">
+  <div class="col-md-8">
+  <h2>Participate in Meme Research!</h2>
+    <p>I've been collecting <abbr title="image macros">memes</abbr> from the Internet for over a year and have a ton. But I need real people, like you, to help me see how effective they are. It doesn't matter how much experience you have; in fact the less Meme-Savvy you, are the better!</p>
+    <h3>OK What do I do</h3>
+    <p>There are two primary "<abbr title="term used very loosely">games</abbr>" featured here. They both require you to sign in through <abbr title="sorry. :(">Facebook</abbr>.
+    <ul style="list-style:none; padding: 0; margin: 0;">
+      <li style="clear:left"><%= image_tag asset_path("which_meme_fits.png"), style: "float:left; margin: 5px;" %>
+        <strong><%= link_to "Which Meme Fits?", new_games_memetype_association_path %></strong>: This one will show you the text of three different memes, but with the same meme image. Pick which one you think fits best!</li>
+      <li style="clear:left"><%= image_tag asset_path("which_text_fits.png"), style: "float:left; margin: 5px;" %>
+      <strong><%= link_to "Which Text Fits?", new_games_typememe_association_path %></strong>: This one will show you three meme images with the text of one of them on each -- choose which one you think fits best!</li>
+    </ul>
+    <br style="clear:both;" />
+    </p>
+
+    <h3>Anything Else?</h3>
+    <p>If you see memes where the text is garbled or if it's particularly offensive or just looks like it should be reviewed, click the <%= fa_icon "flag" %> underneath it, and then I can look them over.</p>
+
+  </div>
+  <div class="col-md-4">
+<%= render partial: "memes/meme_medium", object: @header_meme, locals: { meme_type: @header_meme.meme_type, caption: @header_meme.meme_caption, no_link: true, no_flag: true } %>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-md-6">
+<section id="leaderboard">
+<h3>Leader Board</h3>
+<table>
+<thead><tr>
+<th>User</th><th>Which Text Fits?</th><th>Which Meme Fits?</th>
+</tr></thead>
+<tbody>
+<%= render partial: "users/stats_row", collection: @users %>
+</tbody>
+</table>
+</section>
+</div>
+
+<div class="col-md-6">
+
 <%- if @recent_news.count > 0 %>
   <section id="news">
   <h3>Recent Updates</h3>
@@ -7,23 +48,4 @@
   </section>
 <%- end %>
 
-<section id="meme_type_collection">
-<h3>Meme Type Collection</h3>
-<table id="meme_type_stats">
-  <thead>
-    <tr><th>&nbsp;</th><th>Meme Type</th><th>Count (% of <%= @meme_count %> total)</th></tr>
-  </thead>
-  <tbody>
-    <%- @meme_types.each  do |mt| %>
-    <%-   portion = ((mt.instance_count.to_f / @meme_count) * 100.0).round(2) 
-          row_style = portion.to_i > 0 ? "" : "insignificant"  
-          row_style = portion.to_i > 1 ? "significant" : row_style %>
-      <tr class="<%= row_style %>">
-        <td><%= image_tag mt.template.url(:tiny) %></td>
-        <td><%= link_to mt.name, meme_type_path(mt) %></td>
-        <td><%= mt.instance_count %> ( <%= portion %>% )</td>
-      </tr>
-    <%- end %>
-  </tbody>
-</table>
-</section>
+</div>

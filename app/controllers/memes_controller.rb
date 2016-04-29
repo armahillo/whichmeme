@@ -1,4 +1,5 @@
 class MemesController < ApplicationController
+  authorize_resource
 
   def index
     @memes = Meme.all.limit(50).order('created_utc desc')

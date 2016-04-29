@@ -13,7 +13,7 @@
 
 class Games::TypememeAssociation < ActiveRecord::Base
   # The user
-  belongs_to :user
+  belongs_to :user, counter_cache: :typememe_associations_count
 
   # Memetype
   belongs_to :meme_type
