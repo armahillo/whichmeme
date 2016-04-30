@@ -94,6 +94,8 @@ class User < ActiveRecord::Base
 
   def self.new_with_session(params, session)
   	super.tap do |user|
+      user.fake_name = (Faker::Faker.name + ", " + Faker::Faker.suffix) unless user.fake_name.present? 
+
   		if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
   			user.email = data["email"] if user.email.blank?
   		end

@@ -43,6 +43,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'cancancan', '~> 1.10'
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'faker' # for anonymizing names
 
 # Use Unicorn as the app server
 group :production do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418232635) do
+ActiveRecord::Schema.define(version: 20160430224429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20160418232635) do
     t.integer  "memetype_associations_correct"
     t.integer  "typememe_associations_correct"
     t.string   "avatar_url"
+    t.string   "fake_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

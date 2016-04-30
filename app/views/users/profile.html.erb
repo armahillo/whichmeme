@@ -1,9 +1,27 @@
 <h1>My Info</h1>
 <h2>Info About Me That This Site Has</h2>
+<div class="row">
+  <div class="col-md-6">
+    <h3>How I look to others on this site</h3>
+    <p>Your name is anonymized to a random title to protect your privacy; your avatar is brought in from Facebook so that your friends can identify you.</p>
+    <ul>
+      <li>My random fake name: <%= @user.fake_name %></li>
+      <li>My avatar: <%= image_tag(@user.try(:avatar_url)) %></li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3>My private data that this site knows about</h3>
+    <p>This is identifying info that is used internally to uniquely identify your submissions.</p>
+    <ul>
+      <li>My real name: <%= @user.name %></li>
+      <li>My email: <%= @user.email %></li>
+    </ul>
+  </div>
 <ul>
-  <li><%= @user.name %></li>
-  <li><%= @user.email %></li>
+  
+  
 </ul>
+</div>
 
 <h2>Stats</h2>
 <%= render partial: "users/single_user_stats_table", object: @user %>
