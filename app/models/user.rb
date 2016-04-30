@@ -56,8 +56,8 @@ class User < ActiveRecord::Base
   end
 
   def best_types(limit = nil)
-    meme_type_scores = Games::MemetypeAssociation.joins(:meme_type).correct.by_user(1).group('meme_type_id').order('count_id DESC').count(:id)
-    type_meme_scores = Games::TypememeAssociation.joins(:meme_type).correct.by_user(1).group('meme_type_id').order('count_id DESC').count(:id)
+    meme_type_scores = Games::MemetypeAssociation.joins(:meme_type).correct.by_user(self.id).group('meme_type_id').order('count_id DESC').count(:id)
+    type_meme_scores = Games::TypememeAssociation.joins(:meme_type).correct.by_user(self.id).group('meme_type_id').order('count_id DESC').count(:id)
     ids = (meme_type_scores.keys + type_meme_scores.keys).uniq.sort
     composite = []
     meme_types = MemeType.where(id: ids)
