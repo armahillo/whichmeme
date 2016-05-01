@@ -1,5 +1,5 @@
 <tr id="user-<%= stats_row.id %>" class="<%= 'mine' if(user_signed_in? && stats_row.id == current_user.id) %>">
-  <td><%= image_tag(stats_row.try(:avatar_url)) %></td>
+  <td><%= render partial: "users/avatar", object: stats_row, locals: { small: true } %></td>
   <td><%= link_to stats_row.fake_name, user_path(stats_row) %></td>
   <td><%= pretty_accuracy(stats_row.memetype_accuracy) %></td>
   <td><%= pretty_accuracy(stats_row.typememe_accuracy) %></td>

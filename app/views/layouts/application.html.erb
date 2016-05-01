@@ -27,7 +27,7 @@
   <body id="<%= params[:controller].gsub(/[^A-Za-z0-9]/,"_") %>" class="<%= params[:action] %> <%= user_signed_in? ? 'signed_in' : '' %>">
     <header>
       <%= render 'layouts/navigation' %>
-      <%= render(partial: 'users/metadata', object: current_user) if user_signed_in? %>
+      <%= render(partial: 'users/metadata') if user_signed_in? %>
     </header>
     <main role="main">
       <%= render 'layouts/messages' %>

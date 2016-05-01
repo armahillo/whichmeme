@@ -1,5 +1,5 @@
 <h1><%= @user.fake_name %> <%= '(me)' if (user_signed_in? && current_user == @user) %></h1>
-
+<%= render partial: "users/avatar", object: @user %>
 <h2>Stats</h2>
 
 <%= render partial: "users/single_user_stats_table", object: @user %>

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def index
-    @users = User.all.limit(25)
+    @users = User.ranked.limit(25)
     @recent_news = News.order('updated_at DESC').limit(3)
     @header_meme = Meme.new
     @header_meme.meme_type = MemeType.find_by_name("All The Things")
@@ -31,12 +31,18 @@ class ApplicationController < ActionController::Base
   end
 
   def load_user_metadata
+    # If the user isn't signed in, it's all moot!
   	return unless user_signed_in?
-    @user_metadata = {}
-    @user_metadata["games"] = {}
-    @user_metadata["games"]["memetype_association"] = current_user.memetype_associations_count
-    @user_metadata["games"]["typememe_association"] = current_user.typememe_associations_count
-    @user_metadata["games"]["memetype_accuracy"] = current_user.memetype_accuracy
-    @user_metadata["games"]["typememe_accuracy"] = current_user.typememe_accuracy
+
+    # Since this is loaded on every page, we only want to calculate the values
+    # if they are not already set. The values are updated by the individual controllers
+    # that do the work.
+    session[:user_metadata] ||= {}
+    session[:user_metadata][:games] ||= {}
+    session[:user_metadata][:games][:memetype_association] ||= current_user.memetype_associations_count
+    session[:user_metadata][:games][:typememe_association] ||= current_user.typememe_associations_count
+    session[:user_metadata][:games][:memetype_accuracy] ||= current_user.memetype_accuracy
+    session[:user_metadata][:games][:typememe_accuracy] ||= current_user.typememe_accuracy
+    session[:user_metadata][:games][:best_type] ||= current_user.best_type
   end
 end

@@ -51,8 +51,12 @@ class Games::TypememeAssociationsController < ApplicationController
     correct = correct_meme_type_id == meme_type_id
     current_user.increment!(:typememe_associations_correct) if correct
 
+    session[:user_metadata][:games][:typememe_association] = current_user.typememe_associations_count
+    session[:user_metadata][:games][:typememe_accuracy] = current_user.typememe_accuracy
+
     flash[:correct] = (correct ? 1 : 0)
     if (correct) 
+      session[:user_metadata][:games][:best_type] = current_user.best_type
       flash[:agree] = "They agree!"
     else
       flash[:disagree] = "They disagree :("

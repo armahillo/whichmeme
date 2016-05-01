@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   has_many :memetype_associations, class_name: Games::MemetypeAssociation
   has_many :typememe_associations, class_name: Games::TypememeAssociation
 
+  scope :ranked, -> { order('last_sign_in_at DESC, (memetype_associations_correct + typememe_associations_correct) DESC') }
+
   def memetype_accuracy
     (self.memetype_associations_correct.to_f || 0.0) / (self.memetype_associations_count || 1)
   end
@@ -44,15 +46,7 @@ class User < ActiveRecord::Base
   end
 
   def best_type
-    meme_type_scores = Games::MemetypeAssociation.joins(:meme_type).correct.by_user(1).group('meme_type_id').order('count_id DESC').count(:id)
-    type_meme_scores = Games::TypememeAssociation.joins(:meme_type).correct.by_user(1).group('meme_type_id').order('count_id DESC').count(:id)
-    ids = (meme_type_scores.keys + type_meme_scores.keys).uniq.sort
-    composite = {}
-    ids.each do |mt| 
-      composite[mt.id] = {}
-      composite[mt.id]["score"] = (meme_type_scores[mt.id] || 0) + (type_meme_scores[mt.id] || 0)
-    end
-    composite.sort { |a,b| a[1]["score"] <=> b[1]["score"] }.reverse.first
+    best_types(1).try(:first)
   end
 
   def best_types(limit = nil)
@@ -88,6 +82,7 @@ class User < ActiveRecord::Base
   		user.email = auth.info.email
   		user.password = Devise.friendly_token[0,20]
   		user.name = auth.info.name
+      user.fake_name = (Faker::Faker.name + ", " + Faker::Faker.suffix) unless user.fake_name.present? 
   		user.avatar_url = auth.info.try(:image) rescue ""
   	end
   end
@@ -97,7 +92,8 @@ class User < ActiveRecord::Base
       user.fake_name = (Faker::Faker.name + ", " + Faker::Faker.suffix) unless user.fake_name.present? 
 
   		if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-  			user.email = data["email"] if user.email.blank?
+  			user.email = data["email"] unless user.email.present?
+        user.avatar_url = data["avatar_url"] unless user.avatar_url.present?
   		end
   	end
   end

@@ -1,0 +1,4 @@
+<% small ||= false 
+   style = small ? "width: 24px; height: 24px;" : ""
+   %>
+<%= image_tag(avatar.try(:avatar_url) || (asset_path("missing_avatar.jpg")), style: style ) %>

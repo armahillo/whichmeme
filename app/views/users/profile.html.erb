@@ -6,7 +6,7 @@
     <p>Your name is anonymized to a random title to protect your privacy; your avatar is brought in from Facebook so that your friends can identify you.</p>
     <ul>
       <li>My random fake name: <%= @user.fake_name %></li>
-      <li>My avatar: <%= image_tag(@user.try(:avatar_url)) %></li>
+      <li>My avatar: <%= render partial: "users/avatar", object: @user, locals: { small: true } %></li>
     </ul>
   </div>
   <div class="col-md-6">
