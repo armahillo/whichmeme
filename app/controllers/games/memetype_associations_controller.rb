@@ -54,8 +54,9 @@ class Games::MemetypeAssociationsController < ApplicationController
     memetype_association = Games::MemetypeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_id: correct_meme_id, user: current_user)
 
     correct = correct_meme_id == meme_id
-    current_user.increment!(:memetype_associations_correct) if correct
+    current_user.memetype_associations_correct ||= 0
 
+    current_user.increment!(:memetype_associations_correct) if correct
     session[:user_metadata][:games][:memetype_association] = current_user.memetype_associations_count
     session[:user_metadata][:games][:memetype_accuracy] = current_user.memetype_accuracy
 
@@ -67,6 +68,6 @@ class Games::MemetypeAssociationsController < ApplicationController
       flash[:disagree] = "They disagree :("
     end
     flash[:track] = "memetype"
-    redirect_to :back, status: 303
+    redirect_to :back, status: 303 and return
   end
 end

@@ -38,11 +38,13 @@ class User < ActiveRecord::Base
   scope :ranked, -> { order('last_sign_in_at DESC, (memetype_associations_correct + typememe_associations_correct) DESC') }
 
   def memetype_accuracy
-    (self.memetype_associations_correct.to_f || 0.0) / (self.memetype_associations_count || 1)
+    acc = (self.memetype_associations_correct.to_f || 0.0) / (self.memetype_associations_count || 1) 
+    return acc.nan? ? 0.0 : acc
   end
 
   def typememe_accuracy
-    (self.typememe_associations_correct.to_f || 0.0) / (self.typememe_associations_count || 1)
+    acc = (self.typememe_associations_correct.to_f || 0.0) / (self.typememe_associations_count || 1)
+    return acc.nan? ? 0.0 : acc
   end
 
   def best_type
@@ -50,11 +52,13 @@ class User < ActiveRecord::Base
   end
 
   def best_types(limit = nil)
-    meme_type_scores = Games::MemetypeAssociation.joins(:meme_type).correct.by_user(self.id).group('meme_type_id').order('count_id DESC').count(:id)
-    type_meme_scores = Games::TypememeAssociation.joins(:meme_type).correct.by_user(self.id).group('meme_type_id').order('count_id DESC').count(:id)
+    meme_type_scores = Games::MemetypeAssociation.best_types_by_user(self.id)
+    type_meme_scores = Games::TypememeAssociation.best_types_by_user(self.id)
     ids = (meme_type_scores.keys + type_meme_scores.keys).uniq.sort
+
     composite = []
     meme_types = MemeType.where(id: ids)
+
     meme_types.each do |mt| 
       i = {}
       i["score"] = (meme_type_scores[mt.id] || 0) + (type_meme_scores[mt.id] || 0)
@@ -72,8 +76,8 @@ class User < ActiveRecord::Base
   def recalculate_stats
     User.reset_counters id, :memetype_associations, :typememe_associations
 
-    update_attributes(memetype_associations_correct: Games::MemetypeAssociation.by_user(self).correct.count,
-                      typememe_associations_correct: Games::TypememeAssociation.by_user(self).correct.count)
+    update_attributes(memetype_associations_correct: Games::MemetypeAssociation.total_correct_by_user(self.id),
+                      typememe_associations_correct: Games::TypememeAssociation.total_correct_by_user(self.id))
     
   end
 

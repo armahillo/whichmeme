@@ -29,6 +29,15 @@ class Games::MemetypeAssociation < ActiveRecord::Base
   scope :incorrect, -> { where('meme_id <> correct_meme_id') }
   scope :by_meme_type, ->(meme_type_id) { where(meme_type_id: meme_type_id) }
 
+  def self.best_types_by_user(user_id)
+    joins(:meme_type).correct.by_user(user_id).group('meme_type_id').order('count_id DESC').count(:id)
+  end
+
+  def self.total_correct_by_user(user_id)
+    by_user(user_id).correct.count
+  end
+  
+
   def self.success_by_type
     successes = Games::MemetypeAssociation.joins(:meme_type).correct.group(:meme_type_id).count
     totals = Games::MemetypeAssociation.joins(:meme_type).group(:meme_type_id).count

@@ -17,4 +17,22 @@ RSpec.describe MemesController, type: :controller do
   	end
   end
 
+  describe "PATCH#flag" do
+    before(:each) do
+      @meme = create(:meme)
+      sign_in :user, create(:user)
+    end
+    it "changes the flag status of the instance" do
+      expect { 
+        xhr :patch, :flag, id: @meme.to_param
+        @meme.reload
+      }.to change{@meme.flag}.to(true)
+    end
+
+    it "must be signed in" do
+      sign_out :user
+      xhr :patch, :flag, id: @meme.to_param
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end

@@ -67,6 +67,24 @@ RSpec.describe Meme, type: :model do
   			expect(Meme.long_tail.count).to eq(5)
   		end
   	end
+
+    describe "with_image->" do
+      it "shows just the memes that have images" do
+        mt1 = create(:meme_type)
+        mt2 = create(:meme_type, template_file_name: nil)
+        create(:meme, meme_type: mt1)
+        create(:meme, meme_type: mt2)
+        expect(Meme.with_image.count).to eq(1)
+      end
+    end
+
+    describe "flagged->" do
+      it "shows just the memes that have been flagged" do
+        create(:meme)
+        create(:meme, flag: true)
+        expect(Meme.flagged.count).to be_truthy
+      end
+    end
   end
 
   describe "Methods >" do

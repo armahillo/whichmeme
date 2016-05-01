@@ -49,8 +49,9 @@ class Games::TypememeAssociationsController < ApplicationController
     typememe_association = Games::TypememeAssociation.create!(meme_id: meme_id, meme_type_id: meme_type_id, correct_meme_type_id: correct_meme_type_id, user: current_user)
 
     correct = correct_meme_type_id == meme_type_id
-    current_user.increment!(:typememe_associations_correct) if correct
+    current_user.memetype_associations_correct ||= 0
 
+    current_user.increment!(:typememe_associations_correct) if correct
     session[:user_metadata][:games][:typememe_association] = current_user.typememe_associations_count
     session[:user_metadata][:games][:typememe_accuracy] = current_user.typememe_accuracy
 
@@ -62,7 +63,7 @@ class Games::TypememeAssociationsController < ApplicationController
       flash[:disagree] = "They disagree :("
     end
     flash[:track] = "typememe"
-    redirect_to new_games_typememe_association_path, status: 303 and return
+    redirect_to :back, status: 303 and return
 
   end
 end

@@ -53,4 +53,29 @@ RSpec.describe Games::TypememeAssociation, type: :model do
     	end
     end
   end
+
+  context "Class Methods >" do
+    describe ".best_types_by_user" do
+        it "returns a score and MemeType ID for each item" do
+          user = create(:user)
+          mt1 = create(:meme_type)
+          mt2 = create(:meme_type)
+          2.times { create(:games_typememe_association, :correct, user: user, meme_type: mt1) }
+          create(:games_typememe_association, :correct, user: user, meme_type: mt2)
+          result = Games::TypememeAssociation.best_types_by_user(user.id)
+          expect(result.count).to eq(2)
+          expect(result.keys.first).to eq(mt1.id)
+          expect(result.values.first).to eq(2)
+        end
+    end
+
+    describe ".total_correct_by_user" do
+        it "returns the total number of correct responses a user has" do
+          user = create(:user)
+          create(:games_typememe_association, :correct, user: user)
+          create(:games_typememe_association, :correct, user: user)
+          expect(Games::TypememeAssociation.total_correct_by_user(user.id)).to eq(2)
+        end
+    end
+  end
 end

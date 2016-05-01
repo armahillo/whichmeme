@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
     @meme_count = Meme.count
   end
 
+private
   def load_user_metadata
     # If the user isn't signed in, it's all moot!
   	return unless user_signed_in?

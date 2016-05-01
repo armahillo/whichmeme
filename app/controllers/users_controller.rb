@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @user = User.find(current_user)
+    @user = User.find(current_user.id)
     @best_types = @user.best_types(5)
   end
 end
