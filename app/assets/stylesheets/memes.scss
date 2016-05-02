@@ -16,12 +16,18 @@ article.meme.large {
 article.meme.medium {
   font-size: 1.2em;
   width: 300px;
+  background-color: #f8f8f8;
+  margin: 5px;
 }
+article.meme.medium img {
+  width: 100%;
+}
+
 
 article.meme h4 {
   text-align: center;
   margin: 0;
-  color: #999;
+  color: black !important;
 }
 article.meme.large h4 {
   padding: 4px 2px;
@@ -30,19 +36,20 @@ article.meme.large h4 {
   font-size: 20px
 }
 article.meme.medium h4 {
-  padding: 2px 1px;
+  padding: 0.6em 0;
   min-height: 20px;
   font-weight: 100 !important;
   font-size: 15px;
 }
 article.meme h4 a {
-  color: inherit; 
+  color: black !important;
   text-decoration: none;
 }
 
 article.meme .template {
   height: auto;
   position: relative;
+  font-family: 'Work Sans', 'Arial', 'Verdana', 'sans-serif';
 }
 article.meme a {
   
@@ -51,11 +58,6 @@ article.meme.large .template {
   width: 500px;
   max-width: 500px;
   max-height: 500px;
-}
-article.meme.medium .template {
-  width: 300px;
-  max-width: 300px;
-  max-height: 300px;
 }
 
 article.meme .template p {
@@ -69,20 +71,12 @@ article.meme .template p {
 article.meme.large .template p {
   padding: 0 2px;
   line-height: 1em;
-  text-shadow:
-    -2px -2px 0 #000,
-    2px -2px 0 #000,
-    -2px 2px 0 #000,
-    2px 2px 0 #000;  
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 article.meme.medium .template p {
   padding: 0 1px;
   line-height: 1em;
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;  
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 article.meme.large .template p.top {
@@ -99,16 +93,18 @@ article.meme.medium .template p.bottom {
 }
 
 .meme .flag {
-  color: #999;
+  color: #666;
   text-align: left;
+  font-weight: 100 !important;
+  font-size: 70%;
+  line-height: 200%;
 }
 .meme .flag i,
 .meme .flagged i {
   margin: 0 3px;
 }
 .meme .flag a {
-  color: #AAA;
-  font-size: 14px;
+  color: black !important;
   text-decoration: none;
 }
 .meme .response {
@@ -116,4 +112,6 @@ article.meme.medium .template p.bottom {
 }
 .meme .flagged {
   color: red;
+  font-size: 70%;
+  line-height: 200%;  
 }

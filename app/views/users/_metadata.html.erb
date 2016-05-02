@@ -1,11 +1,10 @@
-<div class="row">
-<div id="user_data" class="col-md-8">
-
-  <strong>Scores:</strong>
-  <ul id="user_stats_metadata" style="display:inline; list-style: none;">
-    <li style="display:inline;">Which Text Fits?: <%= session[:user_metadata][:games][:memetype_association] %> (<%= pretty_accuracy(session[:user_metadata][:games][:memetype_accuracy]) %>)</li>
-    <li style="display:inline;">Which Meme Fits?: <%= session[:user_metadata][:games][:typememe_association] %> (<%= pretty_accuracy(session[:user_metadata][:games][:typememe_accuracy]) %>)</li>
-    <li style="display:inline;">Best Type: <%= session[:user_metadata][:games][:best_type]["data"].name rescue "None yet!" %>
-  </ul>
-</div>
+<div class="row scores-row">
+  <div id="user_data" class="col-md-8">
+    <strong>Scores:</strong>
+    <ul id="user_stats_metadata">
+    <li>Which Text Fits?: <%= session[:user_metadata][:games][:memetype_association] %> (<%=   pretty_accuracy(session[:user_metadata][:games][:memetype_accuracy]) %>)</li>
+    <li>Which Meme Fits?: <%= session[:user_metadata][:games][:typememe_association] %> (<%=   pretty_accuracy(session[:user_metadata][:games][:typememe_accuracy]) %>)</li>
+    <li>Best Type: <%= session[:user_metadata][:games][:best_type]["data"].name rescue "None yet!" %></li  >
+    </ul>
+  </div>
 </div>

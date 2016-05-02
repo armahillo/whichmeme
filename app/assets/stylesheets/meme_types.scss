@@ -2,8 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-div.meme_type {
-  
+div.meme_type { 
   width: 100px;
   position: relative;
 }
@@ -16,9 +15,6 @@ div.meme_type .overlay {
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.meme_types {
-}
-
 .established.meme_types a {
   display: inline-block;
   margin: 2px 1px;
@@ -29,8 +25,4 @@ div.meme_type .overlay {
 
 .established.meme_types a img {
   padding: 0;
-}
-
-.long-tail.meme_types {
-  
 }

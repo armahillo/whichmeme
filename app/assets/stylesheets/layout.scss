@@ -1,9 +1,121 @@
+/*Colors to play with:  0076bb f0faff 0096db; ffff99 0081c4 fff8cc f8f8f8 fff8cc 0076bb 99ccee */
 body {
-  padding: 0 10px;
+  font-weight: 300;
 }
+
+h1:not(.panel-title), h2:not(.panel-title) { color: #0076bb !important; }
+h3:not(.panel-title), a, a:link, a:visited { color: #0096db !important; }
+h4:not(.panel-title), h5:not(.panel-title), h6:not(.panel-title) { 
+  color: #bbb !important; 
+}
+h1:not(:first-child), h2:not(:first-child), h3:not(:first-child), 
+h4:not(:first-child), h5:not(:first-child), h6:not(:first-child) { 
+  margin-top: 1.5em !important; 
+}
+h2.panel-title, h3.panel-title, 
+h4.panel-title, h5.panel-title, 
+h6.panel-title {
+  font-size: 20px;  
+}
+.panel-heading {
+  padding-bottom: 0.5em !important;
+  padding-top: 0.5em !important;
+}
+main .jumbotron h3, main .jumbotron h4, 
+main .jumbotron h5, main .jumbotron h6,
+main h3.list-group-item-heading, main h4.list-group-item-heading,
+main h4.list-group-item-heading, main h5.list-group-item-heading { 
+  margin-top: 0em !important; 
+}
+
+nav.navbar {
+  margin-bottom: 0px !important;
+  background-color: #0076bb;
+  border: 1px solid #0076bb;
+  border-radius: 0;
+}
+.navbar-default .navbar-brand, 
+.navbar-default .navbar-nav > li > a {
+  color: white !important;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: #0086ca !important;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus { 
+  background-color: #0081c4 !important;
+}
+.navbar-default .navbar-nav .dropdown-menu > .active > a, 
+.navbar-default .navbar-nav .dropdown-menu > .active > a:hover, 
+.navbar-default .navbar-nav .dropdown-menu > .active > a:focus {
+  background-color: #f0faff !important;
+  
+}
+.navbar-default .navbar-toggle {
+  border-color: white !important;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white !important;
+}
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover,
+.navbar-default .navbar-toggle:active,
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+  background-color: #0081c4 !important;
+  background-image: none;
+}
+
 main {
   padding: 0 10px;
 }
+
+main .row {
+ margin-left: 0;
+ margin-right: 0;
+}
+main .jumbotron {
+  padding: 20px !important;
+  background-color:  white;
+}
+.scores-row {
+  background-color: #ffffaa;
+  line-height: 250%;
+  font-size: 80%;
+  font-style: italic;
+}
+#user_stats_metadata, 
+#user_stats_metadata li {
+  list-style: none;
+  display:inline;
+}
+@media (max-width: 450px){
+  #user_stats_metadata li, 
+  #user_data strong {
+    display:block !important;
+    line-height: 150%;
+  }
+  #user_stats_metadata {
+    margin: 0;
+    padding: 0;
+  }
+}
+a.list-group-item, button.list-group-item { color: #555 !important; }
+a.list-group-item:active, button.list-group-item:active, 
+a.list-group-item:focus, button.list-group-item:focus, 
+a.list-group-item:hover, button.list-group-item:hover { 
+  color: #0096db !important; 
+}
+a.list-group-item:active .badge, button.list-group-item:active .badge, 
+a.list-group-item:focus .badge, button.list-group-item:focus .badge, 
+a.list-group-item:hover .badge, button.list-group-item:hover .badge { 
+  background-color: #0076bb !important; 
+}
+
 
 ul#nav li a {
 	padding-left: 3px;
@@ -78,31 +190,14 @@ body#devise_sessions.new a.authbutton.facebook {
 	background-color: #3b5998;
 }
 
-body.about main {
-  font-size: 20px;
-}
-body.about main h2,
-body#devise_sessions.new h2 {
-  font-weight: bold;
-  font-size: 42px;
-}
-body.about main h3,
-body#devise_sessions.new h3 {
-  font-size: 32px;
-  font-weight: bold;
-}
-body.about main h4,
-body#devise_sessions.new h4 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
 ol#best_types {
-  display: inline;
+  display: table-row;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 ol#best_types li {
-  float: left;
+  display: table-cell;
+  padding: 0 20px;
+  vertical-align: middle;
 }
