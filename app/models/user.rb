@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   		user.email = auth.info.email
   		user.password = Devise.friendly_token[0,20]
   		user.name = auth.info.name
-      user.fake_name = (Faker::Faker.name + ", " + Faker::Faker.suffix) unless user.fake_name.present? 
+      user.fake_name = (Faker::Name.name + ", " + Faker::Name.suffix) unless user.fake_name.present? 
   		user.avatar_url = auth.info.try(:image) rescue ""
   	end
     # If they haven't provided an avatar image, let's see if we can get one this time.
@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
 
   def self.new_with_session(params, session)
   	super.tap do |user|
-      user.fake_name ||= (Faker::Faker.name + ", " + Faker::Faker.suffix)
+      user.fake_name ||= (Faker::Name.name + ", " + Faker::Name.suffix)
 
   		if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
   			user.email = data["email"] unless user.email.present?
