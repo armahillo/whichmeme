@@ -14,7 +14,9 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require_directory .
+//= require_directory ./games
+
 function show_flash(type, msg) {
   f = $('<div/>').html(msg).addClass('flash_' + type)
   console.log(f);

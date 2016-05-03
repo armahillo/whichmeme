@@ -3,6 +3,21 @@ body {
   font-weight: 300;
 }
 
+.right {
+  float: right !important;
+}
+.left {
+  float: left !important;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0 0 0.5em 0;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+  margin: 0;
+}
+
 h1:not(.panel-title), h2:not(.panel-title) { color: #0076bb !important; }
 h3:not(.panel-title), a, a:link, a:visited { color: #0096db !important; }
 h4:not(.panel-title), h5:not(.panel-title), h6:not(.panel-title) { 
@@ -186,10 +201,11 @@ body#devise_sessions.new a.authbutton i.fa {
 	margin-right: 8px;
 }
 
-body#devise_sessions.new a.authbutton.facebook {
+body#devise_sessions.new a.authbutton.facebook,
+body#devise_sessions.create a.authbutton.facebook {
 	background-color: #3b5998;
+  color: white !important;
 }
-
 ol#best_types {
   display: table-row;
   list-style: none;

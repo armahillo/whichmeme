@@ -1,3 +1,6 @@
+<div class="row">
+<div class="col-md-12">
+
 <h1>Which Text Fits?</h1>
 
 <p><strong>Choose the one the combination you think fits best.</strong></p>
@@ -5,20 +8,15 @@
 
 <%= form_for(@memetype_association, url: games_memetype_association_path, method: :post) do %>
   <% @memes.each do |meme| %>
-    <div class="col-md-4">
-      <label for="" style="margin: 0 auto; text-align: center;">
-      <%= render partial: "memes/meme_medium", object: meme, locals: { meme_type: @meme_type, no_link: true } %>
-      <div style="clear:both;">
-      
-        <%= radio_button "memetype_association", "meme_id", meme.id %> 
-        <span>this one</span>
-      
-      </div>
-      </label>
-    </div>
+    <label class="col-md-4 col-sm-6 col-xs-12">
+      <%= render partial: "memes/meme_medium", object: meme, locals: { meme_type: @meme_type, no_link: true, meme_rb_id: meme.id } %>
+    </label>
   <% end %>
-  <br style="clear:both;" />
+  <div class="col-xs-12">
   <%= hidden_field_tag "meme_type_id", @meme_type.id %>
   <%= hidden_field_tag "meme_ids", @memes.collect { |m| m.id }.join(",") %>
-  <%= submit_tag "Next >" %>
+  <%= submit_tag "Submit & Play Again", class: "right btn btn-primary btn-lg" %>
+  </div>
 <% end %>
+
+</div></div>

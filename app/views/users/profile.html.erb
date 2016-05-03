@@ -1,27 +1,34 @@
-<h1>My Info</h1>
-<h2>Info About Me That This Site Has</h2>
 <div class="row">
-  <div class="col-md-6">
-    <h3>How I look to others on this site</h3>
-    <p>Your name is anonymized to a random title to protect your privacy; your avatar is brought in from Facebook so that your friends can identify you.</p>
-    <ul>
-      <li>My random fake name: <%= @user.fake_name %></li>
-      <li>My avatar: <%= render partial: "users/avatar", object: @user, locals: { small: true } %></li>
-    </ul>
+  <div class="col-md-12">
+        <h1>My Info</h1>
   </div>
-  <div class="col-md-6">
-    <h3>My private data that this site knows about</h3>
-    <p>This is identifying info that is used internally to uniquely identify your submissions.</p>
-    <ul>
-      <li>My real name: <%= @user.name %></li>
-      <li>My email: <%= @user.email %></li>
+  
+  <div class="col-md-3 col-sm-4 col-xs-12 right">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">About Me</h2>
+    </div>
+  <p class="panel-body">This site has the following info   about me on file, but other users can't see it:</p>
+    <ul class="list-group">
+      <li class="list-group-item">My real name: <%= @user.name %></li>
+      <li class="list-group-item">My email: <%= @user.email %></li>
     </ul>
+    </div>
+
+    <div class="panel panel-default">
+    <p class="panel-body">To others on this site, I appear as:</p>
+    <ul class="list-group">
+      <li class="list-group-item">My random fake name: <%= @user.fake_name %></li>
+      <li class="list-group-item">My avatar: <%= render partial: "users/avatar", object: @user, locals: { small: true } %></li>
+    </ul>
+    </div>
   </div>
-<ul>
-  
-  
-</ul>
+
+<div class="col-md-9 col-sm-8 col-xs-12">
+  <%= render partial: "users/best_types", object: @best_types %>
+
 </div>
 
-<h2>Stats</h2>
-<%= render partial: "users/single_user_stats_table", object: @user %>
+<div class="col-md-12 col-sm-12 col-xs-12">
+<%= render partial: "users/cohesion_table", object: @user %>
+</div>

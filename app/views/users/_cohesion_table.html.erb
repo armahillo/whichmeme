@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Cohesion</h2>
+  </div>
+<p class="panel-body"><em>"Cohesion" because, since all of these meanings are emergent, 
+this represents how much your own assessments are consistent with the 
+greater community. It's not really "right" or "wrong".</em></p>
+<table id="stats" class="table table-bordered table-condensed">
+<thead>
+  <tr>
+    <th scope="col">Game</th>
+    <th scope="col">Correct</th>
+    <th scope="col">Attempts</th>
+    <th scope="col">Accuracy</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+  <th>Which Text Fits?</th>
+  <td><%= cohesion_table.memetype_associations_correct %></td>
+  <td><%= cohesion_table.memetype_associations_count %></td>
+  <td><%= number_with_precision(cohesion_table.memetype_accuracy*100, precision: 2) %>%</td>
+</tr>
+<tr>
+  <th>Which Meme Fits?</th>
+  <td><%= cohesion_table.typememe_associations_correct %></td>
+  <td><%= cohesion_table.typememe_associations_count %></td>
+  <td><%= number_with_precision(cohesion_table.typememe_accuracy*100, precision: 2) %>%</td>
+</tr>
+</tbody>
+</table>
+</div>

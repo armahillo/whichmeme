@@ -1,0 +1,16 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title">Top 5 Best Types</h2>
+  </div>
+  <p class="panel-body"></p>
+
+<ol id="best_types">
+  <% best_types.each do |best,score| %>
+    <li>
+    <%= render partial: "meme_types/meme_type", object:best["data"], locals: { overlay: best["score"] } %>
+    </li>
+  <% end %>
+</ol>
+  
+</div>
+

@@ -1,14 +1,15 @@
+<div class="memes-image-rows">
+
+<div class="row">
+<% counter = 0 %>
 <%- @memes.each do |m| %>
+  <% counter += 1 %>
   <%= render partial: "memes/meme_medium", object: m, as: :meme %>
+  <div class="clearfix visible-xs-block"></div>
+  <%- if counter % 3 == 0 %>
+    </div><div class="row">
+  <%- end %>
+  
 <%- end %>
 
-<table id="memes" class="table striped">
-<%- @memes.each do |m| %>
-  <tr id="<%= m.id %>">
-    <td><%= image_tag m.meme_type.template.url(:tiny) %></td>
-    <td><%= link_to m.meme_type.name, meme_type_path(m.meme_type.id) %></td>
-    <td><%= m.link_title %></td>
-    <td><%= m.meme_caption %></td>
-  </tr>
-<%- end %>
-</table>
+</div>

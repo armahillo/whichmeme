@@ -5,10 +5,6 @@
 /* Open Source "Impact" like font */
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:900);
 
-
-article.meme { 
-  font-family: 'Work Sans', 'Arial', 'Verdana', 'sans-serif';
-}
 article.meme.large {
   font-size: 2em;
   width: 500px; 
@@ -51,9 +47,7 @@ article.meme .template {
   position: relative;
   font-family: 'Work Sans', 'Arial', 'Verdana', 'sans-serif';
 }
-article.meme a {
-  
-}
+
 article.meme.large .template {
   width: 500px;
   max-width: 500px;

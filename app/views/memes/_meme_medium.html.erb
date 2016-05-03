@@ -4,11 +4,19 @@
 <% no_flag ||= false # show flagging by default %>
 <% url = no_link ? "javascript:void(0)" : url_for(meme_path(meme)) %>
 <% title = meme.try(:link_title) %>
+<% meme_rb_id ||= nil %>
+<% memetype_rb_id ||= nil %>
+<% if meme_rb_id.present? 
+     button = "<small>#{radio_button("memetype_association", "meme_id", meme_rb_id)}</small>".html_safe
+   elsif memetype_rb_id.present?
+     button = "<small>#{radio_button("typememe_association", "meme_type_id", memetype_rb_id)} </small>".html_safe 
+   end 
+%>
 <% caption = JSON.parse(meme.meme_caption) %>
 
-<article class="meme medium" style="display: inline; background-color: black;  margin: 5px; float: left;">
+<article class="meme medium thumbnail col-md-4 col-xs-12">
   <% unless (title.nil? && no_link) %>
-  <h4><%= link_to (title || "(untitled)"), url %></h4>
+  <h4><%= button %><%= link_to (title || "(untitled)"), url %></h4>
   <% end %>
   <div class="template">
     <img src="<%= image_path(meme_type.template(:medium)) %>" alt="<%= meme_type.name %>" />
