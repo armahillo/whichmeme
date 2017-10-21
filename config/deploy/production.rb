@@ -8,7 +8,7 @@ set :rails_env, :production
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server '45.55.181.42', user: 'deploy', roles: %w{web}, primary: true
+server 'whichmeme.info', user: 'deploy', roles: %w{web app db}, primary: true, port: 2222
 
 
 # role-based syntax
@@ -19,9 +19,9 @@ server '45.55.181.42', user: 'deploy', roles: %w{web}, primary: true
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-role :app, %w{deploy@45.55.181.42}
-role :web, %w{deploy@45.55.181.42}
-role :db,  %w{deploy@45.55.181.42}
+#role :app, %w{deploy@45.55.181.42}
+#role :web, %w{deploy@45.55.181.42}
+#role :db,  %w{deploy@45.55.181.42}
 
 
 
@@ -47,7 +47,8 @@ set :ssh_options, {
    keys: %w(/home/aaron/.ssh/id_rsa),
    forward_agent: false,
    auth_methods: %w(publickey),
-   user: 'deploy'
+   user: 'deploy',
+   port: 2222
  }
 #
 # The server-based syntax can be used to override options:

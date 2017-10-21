@@ -2,7 +2,8 @@
 lock '3.4.0'
 
 set :application, 'whichmeme'
-set :repo_url, 'aaron@45.55.181.42:~/git/whichmeme.git'
+set :repo_url, 'git@github.com:armahillo/whichmeme.git'
+# 'aaron@45.55.181.42:~/git/whichmeme.git'
 
 # RVM configuration
 # set :rvm_type, :user # Default is "auto"
@@ -14,6 +15,11 @@ set :repo_url, 'aaron@45.55.181.42:~/git/whichmeme.git'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deploy/apps/whichmeme'
+
+set :ssh_options, { 
+  user: 'deploy',
+  port: 2222
+}
 
 # Default value for :scm is :git
 set :scm, :git
@@ -32,7 +38,6 @@ set :linked_files, fetch(:linked_files, []).push('.env')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'vendor/bundle', 'public/system', 'data')
-
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
