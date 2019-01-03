@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-gem 'dotenv'
+gem 'dotenv-rails'
 
 gem 'paperclip'
 
@@ -42,7 +42,9 @@ gem 'activeadmin', github: 'activeadmin'
 # User management
 gem 'cancancan', '~> 1.10'
 gem 'devise'
+gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2', '~> 0.2.2'
 gem 'faker' # for anonymizing names
 
 # Use Unicorn as the app server

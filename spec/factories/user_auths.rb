@@ -8,6 +8,10 @@
 #  oauth_id       :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  token          :string
+#  expires_at     :integer
+#  expires        :boolean
+#  refresh_token  :string
 #
 
 FactoryGirl.define do

@@ -23,6 +23,7 @@
 #  memetype_associations_correct :integer
 #  typememe_associations_correct :integer
 #  avatar_url                    :string
+#  fake_name                     :string
 #
 
 FactoryGirl.define do

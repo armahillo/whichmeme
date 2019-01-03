@@ -193,7 +193,7 @@ body.signed_in .signin_required {
 
 body#devise_sessions.new a.authbutton {
   text-decoration: none;
-  color: white;
+  color: white !important;
   font-size: 18px;
 }
 body#devise_sessions.new a.authbutton i.fa {
@@ -206,6 +206,13 @@ body#devise_sessions.create a.authbutton.facebook {
 	background-color: #3b5998;
   color: white !important;
 }
+
+body#devise_sessions.new a.authbutton.facebook,
+body#devise_sessions.create a.authbutton.facebook {
+  background-color: #4285F4;
+  color: white !important;
+}
+
 ol#best_types {
   display: table-row;
   list-style: none;

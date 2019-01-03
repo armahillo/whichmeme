@@ -22,10 +22,11 @@
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-  <a href="<%= omniauth_authorize_path(resource_name, provider) %>" class="authbutton btn btn-primary large <%= provider %>">
-  <i class="fa fa-<%= provider %>" title="Sign in with <%= provider %>" aria-hidden="true"></i>
-  <span>Sign in with <%= provider %></span>
+  <%- resource_class.omniauth_providers.each do |provider| 
+    fa_class = provider.to_s.split("_").first %>
+  <a href="<%= omniauth_authorize_path(resource_name, provider) %>" class="authbutton btn btn-primary large <%= fa_class %>">
+  <i class="fa fa-<%= fa_class %>" title="Sign in with <%= provider %>" aria-hidden="true"></i>
+  <span>Sign in with <%= fa_class.humanize %></span>
 </a>
 
   <% end -%>
