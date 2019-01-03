@@ -8,7 +8,7 @@ set :rails_env, :production
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server 'whichmeme.info', user: 'deploy', roles: %w{web app db}, primary: true, port: 2222
+server 'whichmeme.info', user: 'deploy', roles: %w{web app db}, primary: true, port: 22
 
 
 # role-based syntax
@@ -45,10 +45,10 @@ set :deploy_to, "/home/deploy/apps/whichmeme"
 # --------------
 set :ssh_options, {
    keys: %w(/home/aaron/.ssh/id_rsa),
-   forward_agent: false,
+   forward_agent: true,
    auth_methods: %w(publickey),
    user: 'deploy',
-   port: 2222
+   port: 22
  }
 #
 # The server-based syntax can be used to override options:
